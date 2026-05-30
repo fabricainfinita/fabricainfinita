@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fábrica Infinita — Produtos exclusivos em impressão 3D. Design moderno, personalização total e qualidade premium para transformar seu espaço.">
+  <title>Fábrica Infinita — Impressão 3D Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#FAFAFA; --bg2:#F4F0FF; --lav-xl:#F7F3FF; --lav-l:#EDE5FF; --lav:#DDD0FF;
+      --lilac:#C4ADEE; --purple-s:#9B7FD4; --purple-m:#7C5CBF; --purple-d:#5E3DAA;
+      --purple-xd:#3D1E8C; --dark:#1A1728; --dark2:#2D1B5E; --mid:#5A5478; --light:#9895B5;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--lav-xl)}
+    ::-webkit-scrollbar-thumb{background:var(--purple-s);border-radius:3px}
+
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+    @keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+    @keyframes glow{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.55;transform:scale(1.06)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes badgePop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+    @keyframes toastSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+    .fu{animation:fadeUp .7s ease both}
+    .fu1{animation:fadeUp .7s .1s ease both}
+    .fu2{animation:fadeUp .7s .2s ease both}
+    .fu3{animation:fadeUp .7s .3s ease both}
+
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--purple-d),var(--purple-m));color:#fff;border:none;padding:14px 32px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .25s,box-shadow .25s;box-shadow:0 8px 28px rgba(94,61,170,.38)}
+    .btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(94,61,170,.48)}
+    .btn-s{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--purple-d);border:2px solid var(--lilac);padding:12px 28px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:500;font-size:15px;cursor:pointer;text-decoration:none;transition:all .25s}
+    .btn-s:hover{background:var(--lav-l);border-color:var(--purple-s);transform:translateY(-2px)}
+
+    /* ─ NAVBAR ─ */
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 6%;transition:background .3s,box-shadow .3s}
+    .navbar.scrolled{background:rgba(250,250,250,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(196,173,238,.25)}
+    .nav-inner{max-width:1200px;margin:0 auto;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:20px;font-weight:800;letter-spacing:-.5px;text-decoration:none;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .logo small{font-weight:300;font-size:.8em}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--mid);font-size:14px;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--purple-d)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .cart-btn{position:relative;background:none;border:none;cursor:pointer;font-size:20px;color:var(--dark);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .cart-btn:hover{background:var(--lav-l)}
+    .cart-badge{position:absolute;top:4px;right:4px;background:var(--purple-d);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;animation:badgePop .3s ease}
+    .hamburger{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--dark);padding:4px}
+    .mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(250,250,250,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--lav);z-index:998;padding:20px 6%}
+    .mobile-menu.open{display:block}
+    .mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+    .mobile-menu a{display:block;padding:12px 16px;text-decoration:none;color:var(--dark);font-size:16px;font-weight:500;border-radius:12px;transition:background .2s}
+    .mobile-menu a:hover{background:var(--lav-l);color:var(--purple-d)}
+
+    /* ─ HERO ─ */
+    .hero{min-height:100vh;background:linear-gradient(155deg,var(--lav-xl) 0%,#fff 45%,var(--lav-l) 100%);display:flex;align-items:center;padding:90px 6% 60px;position:relative;overflow:hidden}
+    .hblob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:glow 5s ease-in-out infinite}
+    .hb1{width:650px;height:650px;background:radial-gradient(circle,rgba(124,92,191,.2) 0%,transparent 70%);top:-200px;right:-80px}
+    .hb2{width:450px;height:450px;background:radial-gradient(circle,rgba(196,173,238,.18) 0%,transparent 70%);bottom:-120px;left:5%;animation-delay:2.5s}
+    .hb3{width:280px;height:280px;background:radial-gradient(circle,rgba(221,208,255,.25) 0%,transparent 70%);top:35%;left:38%;animation-delay:1.2s}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;position:relative}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(196,173,238,.4);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--purple-d);margin-bottom:24px}
+    .bdot{width:7px;height:7px;border-radius:50%;background:var(--purple-s);animation:glow 2s ease-in-out infinite}
+    .hero-title{font-size:clamp(34px,4.5vw,62px);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:20px}
+    .hero-title .grad{background:linear-gradient(135deg,var(--purple-d) 0%,var(--purple-s) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:var(--mid);line-height:1.7;max-width:440px;margin-bottom:38px;font-weight:400}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+    .hero-stats{display:flex;gap:28px;margin-top:48px;padding-top:32px;border-top:1px solid var(--lav)}
+    .stat-num{font-size:24px;font-weight:800;color:var(--dark)}
+    .stat-lbl{font-size:13px;color:var(--light)}
+    .hero-visual{position:relative;height:500px}
+    .card3d{position:absolute;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(196,173,238,.4);border-radius:24px;box-shadow:0 20px 60px rgba(94,61,170,.14);display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .card-main{width:260px;height:280px;top:50%;left:50%;transform:translate(-50%,-50%);padding:28px;animation:float 7s ease-in-out infinite}
+    .card-sm1{width:155px;height:120px;top:8%;left:-2%;padding:16px;animation:float2 9s ease-in-out infinite}
+    .card-sm2{width:145px;height:110px;bottom:6%;right:-2%;padding:16px;animation:float2 11s ease-in-out infinite 2s}
+    .card-sm3{width:130px;height:70px;top:62%;left:-5%;padding:12px;animation:float 13s ease-in-out infinite 1s}
+    .clabel{font-size:12px;font-weight:600;color:var(--dark);text-align:center;margin-top:8px}
+    .cprice{font-size:13px;font-weight:700;color:var(--purple-d);text-align:center}
+    .ctag{font-size:10px;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));border-radius:50px;padding:3px 10px;margin-top:6px}
+
+    /* ─ SECTION BASE ─ */
+    .section{padding:84px 6%}
+    .si{max-width:1200px;margin:0 auto}
+    .shd{text-align:center;margin-bottom:52px}
+    .stag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple-s);margin-bottom:10px}
+    .stitle{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:10px}
+    .ssub{font-size:16px;color:var(--mid);max-width:480px;margin:0 auto;font-weight:400}
+
+    /* ─ CATEGORIES ─ */
+    .cats-sec{background:linear-gradient(180deg,#fff 0%,var(--lav-xl) 100%)}
+    .cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+    .cat-card{background:#fff;border:1.5px solid var(--lav);border-radius:20px;padding:28px 14px 22px;text-align:center;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden}
+    .cat-card::after{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,var(--lav-l),rgba(255,255,255,0));opacity:0;transition:opacity .3s}
+    .cat-card:hover{border-color:var(--purple-s);transform:translateY(-7px);box-shadow:0 18px 48px rgba(94,61,170,.16),0 0 0 1px rgba(155,127,212,.15)}
+    .cat-card:hover::after{opacity:1}
+    .cat-ico{width:60px;height:60px;border-radius:16px;background:var(--lav-l);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px;transition:background .3s}
+    .cat-card:hover .cat-ico{background:var(--lav)}
+    .cat-name{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:3px}
+    .cat-desc{font-size:12px;color:var(--light)}
+
+    /* ─ PRODUCTS ─ */
+    .prods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
+    .prod-card{background:#fff;border:1.5px solid var(--lav);border-radius:24px;overflow:hidden;transition:all .35s ease;position:relative}
+    .prod-card:hover{transform:translateY(-10px);box-shadow:0 28px 64px rgba(94,61,170,.16);border-color:var(--lilac)}
+    .prod-img{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .prod-badge{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,var(--purple-d),var(--purple-m));color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:50px;letter-spacing:.5px;z-index:2}
+    .prod-wish{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.8);backdrop-filter:blur(8px);border:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;z-index:2}
+    .prod-wish:hover{transform:scale(1.15);background:#fff}
+    .prod-info{padding:20px 22px 22px}
+    .prod-cat{font-size:11px;color:var(--purple-s);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+    .prod-name{font-size:17px;font-weight:700;margin-bottom:6px}
+    .prod-desc{font-size:13px;color:var(--light);line-height:1.55;margin-bottom:16px}
+    .prod-footer{display:flex;align-items:center;justify-content:space-between}
+    .prod-price{font-size:22px;font-weight:800;color:var(--dark)}
+    .prod-add{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--purple-d),var(--purple-m));color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .22s,box-shadow .22s;box-shadow:0 4px 14px rgba(94,61,170,.32)}
+    .prod-add:hover{transform:scale(1.12) rotate(10deg);box-shadow:0 8px 22px rgba(94,61,170,.44)}
+
+    /* ─ WHY US ─ */
+    .why-sec{background:linear-gradient(140deg,var(--dark) 0%,var(--dark2) 100%);padding:84px 6%;position:relative;overflow:hidden}
+    .wblob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px)}
+    .wb1{width:500px;height:500px;background:rgba(124,92,191,.14);top:-150px;right:-100px}
+    .wb2{width:350px;height:350px;background:rgba(196,173,238,.08);bottom:-80px;left:-60px}
+    .why-sec .stag{color:var(--lilac)}
+    .why-sec .stitle{color:#fff}
+    .why-sec .ssub{color:rgba(255,255,255,.55)}
+    .feats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+    .feat-card{background:rgba(255,255,255,.04);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:34px 28px;transition:all .3s}
+    .feat-card:hover{background:rgba(255,255,255,.07);border-color:rgba(196,173,238,.25);transform:translateY(-5px)}
+    .feat-ico{width:54px;height:54px;border-radius:15px;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;box-shadow:0 8px 22px rgba(94,61,170,.45)}
+    .feat-title{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px}
+    .feat-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65}
+
+    /* ─ GALLERY ─ */
+    .gal-sec{background:var(--lav-xl)}
+    .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 220px;gap:14px}
+    .gal-item{border-radius:20px;overflow:hidden;position:relative;cursor:pointer}
+    .gal-item.g1{grid-column:1/3;grid-row:1/3}
+    .gal-item.g4{grid-column:3/5}
+    .gal-bg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:transform .4s ease}
+    .gal-item:hover .gal-bg{transform:scale(1.05)}
+    .gal-over{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;background:linear-gradient(transparent,rgba(26,23,40,.65));color:#fff;opacity:0;transition:opacity .3s}
+    .gal-item:hover .gal-over{opacity:1}
+    .gal-lbl{font-size:15px;font-weight:600}
+    .gal-sl{font-size:12px;opacity:.75}
+    .gal-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.65);text-align:center}
+
+    /* ─ TESTIMONIALS ─ */
+    .testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+    .testi-card{background:#fff;border:1.5px solid var(--lav);border-radius:24px;padding:30px 32px;transition:all .3s}
+    .testi-card:hover{border-color:var(--lilac);box-shadow:0 12px 36px rgba(94,61,170,.12);transform:translateY(-5px)}
+    .testi-q{font-size:52px;line-height:1;color:var(--lav);font-family:Georgia,serif;margin-bottom:4px}
+    .testi-text{font-size:15px;color:var(--mid);font-style:italic;line-height:1.7;margin-bottom:22px}
+    .testi-foot{display:flex;align-items:center;gap:12px}
+    .testi-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .testi-name{font-weight:700;font-size:15px}
+    .testi-loc{font-size:13px;color:var(--light)}
+    .testi-stars{color:#F5A623;font-size:13px;margin-top:1px}
+
+    /* ─ NEWSLETTER ─ */
+    .nl-sec{background:linear-gradient(140deg,var(--purple-d) 0%,var(--purple-m) 100%);padding:84px 6%;position:relative;overflow:hidden}
+    .nl-sec::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.07);top:-300px;right:-150px;pointer-events:none}
+    .nl-sec::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.05);bottom:-150px;left:5%;pointer-events:none}
+    .nl-inner{max-width:580px;margin:0 auto;text-align:center;position:relative}
+    .nl-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:12px;font-weight:600;letter-spacing:1px;padding:6px 14px;border-radius:50px;margin-bottom:18px}
+    .nl-inner h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.5px}
+    .nl-inner p{font-size:16px;color:rgba(255,255,255,.7);margin-bottom:34px}
+    .nl-form{display:flex;gap:10px;max-width:460px;margin:0 auto}
+    .nl-input{flex:1;padding:14px 20px;border-radius:50px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-family:'Poppins',sans-serif;outline:none;transition:border-color .2s}
+    .nl-input::placeholder{color:rgba(255,255,255,.55)}
+    .nl-input:focus{border-color:rgba(255,255,255,.65)}
+    .nl-btn{padding:14px 26px;background:#fff;color:var(--purple-d);border:none;border-radius:50px;font-weight:700;font-size:14px;font-family:'Poppins',sans-serif;cursor:pointer;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+    .nl-btn:hover{transform:scale(1.04);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+    .nl-ok{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:14px 22px;color:#fff;font-weight:600;font-size:15px;display:none;font-family:'Poppins',sans-serif}
+
+    /* ─ FOOTER ─ */
+    .footer{background:var(--dark);padding:64px 6% 32px}
+    .footer-inner{max-width:1200px;margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+    .flogo{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--lilac),var(--purple-s));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;display:block;letter-spacing:-.4px}
+    .fdesc{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:22px}
+    .socials{display:flex;gap:10px}
+    .soc-a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;color:rgba(255,255,255,.65);transition:all .2s}
+    .soc-a:hover{background:var(--purple-d);border-color:var(--purple-s);transform:translateY(-2px);color:#fff}
+    .fcol h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:.3px}
+    .fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .fcol a{color:rgba(255,255,255,.48);font-size:14px;text-decoration:none;transition:color .2s}
+    .fcol a:hover{color:var(--lilac)}
+    .fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:10px}
+    .fbot a{color:rgba(255,255,255,.45);text-decoration:none}
+    .fbot a:hover{color:var(--lilac)}
+
+    /* ─ TOAST ─ */
+    .toast{position:fixed;bottom:28px;right:28px;background:var(--dark);color:#fff;font-size:14px;font-weight:500;padding:14px 22px;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.25);border-left:4px solid var(--purple-s);opacity:0;transform:translateY(12px);transition:all .3s;z-index:9999;pointer-events:none;font-family:'Poppins',sans-serif}
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    /* ─ RESPONSIVE ─ */
+    @media(max-width:900px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{display:none}
+      .footer-top{grid-template-columns:1fr 1fr}
+      .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+      .gal-item.g1{grid-column:1/2;grid-row:1/2}
+      .gal-item.g4{grid-column:1/3}
+    }
+    @media(max-width:600px){
+      .nav-links{display:none}
+      .hamburger{display:block}
+      .section{padding:60px 5%}
+      .why-sec{padding:60px 5%}
+      .nl-sec{padding:60px 5%}
+      .footer{padding:60px 5% 32px}
+      .footer-top{grid-template-columns:1fr}
+      .gal-grid{grid-template-columns:1fr;grid-template-rows:none}
+      .gal-item.g1,.gal-item.g4{grid-column:auto;grid-row:auto}
+      .nl-form{flex-direction:column}
+      .hero-stats{gap:18px}
+      .hero-ctas{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="#">Fábrica<small> Infinita</small></a>
+    <ul class="nav-links">
+      <li><a href="#categorias">Categorias</a></li>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartBtn" title="Carrinho">
+        🛒
+        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+      </button>
+      <a href="#produtos" class="btn-p" style="padding:10px 22px;font-size:13px">Comprar</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#categorias" onclick="toggleMenu()">Categorias</a></li>
+    <li><a href="#produtos" onclick="toggleMenu()">Produtos</a></li>
+    <li><a href="#sobre" onclick="toggleMenu()">Sobre nós</a></li>
+    <li><a href="#galeria" onclick="toggleMenu()">Galeria</a></li>
+    <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
+  </ul>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hblob hb1"></div>
+  <div class="hblob hb2"></div>
+  <div class="hblob hb3"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge fu"><span class="bdot"></span> Impressão 3D Premium · Feito no Brasil</div>
+      <h1 class="hero-title fu1">Objetos que<br><span class="grad">transformam</span><br>seu espaço.</h1>
+      <p class="hero-sub fu2">Produtos exclusivos em impressão 3D — design criativo, qualidade premium e personalização total para deixar sua casa e escritório únicos.</p>
+      <div class="hero-ctas fu3">
+        <a href="#produtos" class="btn-p">✦ Explorar coleção</a>
+        <a href="#sobre" class="btn-s">Saiba mais →</a>
+      </div>
+      <div class="hero-stats fu3">
+        <div><div class="stat-num">800+</div><div class="stat-lbl">Produtos únicos</div></div>
+        <div><div class="stat-num">4.9★</div><div class="stat-lbl">Avaliação média</div></div>
+        <div><div class="stat-num">3.2k</div><div class="stat-lbl">Clientes felizes</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="card3d card-main">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="55" r="42" fill="rgba(155,127,212,.1)"/>
+          <circle cx="60" cy="55" r="28" fill="rgba(155,127,212,.14)"/>
+          <path d="M28 76 L60 24 L92 76 Z" fill="#9B7FD4" opacity=".88"/>
+          <path d="M33 76 L60 32 L87 76 Z" fill="rgba(255,255,255,.2)"/>
+          <rect x="55" y="76" width="10" height="28" rx="5" fill="#C4ADEE"/>
+          <ellipse cx="60" cy="106" rx="22" ry="6" fill="#DDD0FF"/>
+          <circle cx="60" cy="50" r="10" fill="rgba(255,255,255,.9)"/>
+          <circle cx="60" cy="50" r="5" fill="#9B7FD4"/>
+        </svg>
+        <div class="clabel">Luminária Orbital</div>
+        <div class="cprice">R$ 89,90</div>
+        <div class="ctag">Mais Vendido</div>
+      </div>
+      <div class="card3d card-sm1">
+        <svg width="52" height="70" viewBox="0 0 52 70" fill="none">
+          <path d="M12 60 Q4 44 7 28 Q11 14 26 11 Q41 14 45 28 Q48 44 40 60 Z" fill="#9B7FD4" opacity=".85"/>
+          <path d="M14 56 Q7 42 10 28 Q26 10 24 28 Q19 44 14 56 Z" fill="rgba(255,255,255,.15)"/>
+          <ellipse cx="26" cy="61" rx="10" ry="3" fill="#7C5CBF"/>
+          <path d="M22 11 Q16 1 12 0" stroke="#5A9A70" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="10" cy="2" rx="5" ry="9" fill="#5A9A70" opacity=".9" transform="rotate(-15 10 2)"/>
+          <path d="M30 10 Q36 0 40 -1" stroke="#68B884" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="41" cy="1" rx="5" ry="8" fill="#68B884" opacity=".9" transform="rotate(20 41 1)"/>
+        </svg>
+        <div class="clabel" style="font-size:11px">Vaso Minimalista</div>
+        <div class="cprice" style="font-size:12px">R$ 49,90</div>
+      </div>
+      <div class="card3d card-sm2">
+        <svg width="72" height="52" viewBox="0 0 72 52" fill="none">
+          <rect x="3" y="31" width="66" height="17" rx="6" fill="#9B7FD4" opacity=".9"/>
+          <rect x="3" y="18" width="46" height="15" rx="6" fill="#A898D8"/>
+          <rect x="3" y="7" width="30" height="13" rx="6" fill="#C4ADEE"/>
+          <rect x="16" y="33" width="2" height="13" fill="rgba(255,255,255,.35)"/>
+          <rect x="32" y="33" width="2" height="13" fill="rgba(255,255,255,.35)"/>
+          <rect x="50" y="33" width="2" height="13" fill="rgba(255,255,255,.35)"/>
+        </svg>
+        <div class="clabel" style="font-size:11px">Organizador</div>
+        <div class="cprice" style="font-size:12px">R$ 64,90</div>
+      </div>
+      <div class="card3d card-sm3" style="text-align:center">
+        <div style="font-size:13px;font-weight:700;color:var(--purple-d)">✦ Frete Grátis</div>
+        <div style="font-size:11px;color:var(--light)">Acima de R$150</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATEGORIAS ════════════════════════════════════════════════════════════ -->
+<section class="section cats-sec" id="categorias">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Navegue por categoria</div>
+      <h2 class="stitle">Encontre o que você ama</h2>
+      <p class="ssub">Produtos criados com design e propósito para cada estilo de vida</p>
+    </div>
+    <div class="cats-grid" id="catsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ PRODUTOS ══════════════════════════════════════════════════════════════ -->
+<section class="section" id="produtos" style="background:#fff">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Seleção especial</div>
+      <h2 class="stitle">Produtos em destaque</h2>
+      <p class="ssub">Os queridinhos da nossa coleção — design exclusivo, qualidade garantida</p>
+    </div>
+    <div class="prods-grid" id="prodsGrid"></div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#" class="btn-s" style="font-size:15px">Ver toda a coleção →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POR QUE NÓS ═══════════════════════════════════════════════════════════ -->
+<section class="why-sec" id="sobre">
+  <div class="wblob wb1"></div>
+  <div class="wblob wb2"></div>
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Por que a Fábrica Infinita</div>
+      <h2 class="stitle">Feito diferente. Feito pra você.</h2>
+      <p class="ssub">Cada peça é produzida com cuidado, criatividade e tecnologia de ponta</p>
+    </div>
+    <div class="feats-grid" id="featsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ GALERIA ═══════════════════════════════════════════════════════════════ -->
+<section class="section gal-sec" id="galeria">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Galeria lifestyle</div>
+      <h2 class="stitle">Nossos produtos no seu mundo</h2>
+      <p class="ssub">Veja como cada peça transforma ambientes com personalidade e design</p>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item g1">
+        <div class="gal-bg" style="background:linear-gradient(135deg,#2D1B5E 0%,#5E3DAA 60%,#9B7FD4 100%);height:100%">
+          <svg width="130" height="150" viewBox="0 0 130 150" fill="none" style="opacity:.65">
+            <path d="M26 132 Q12 100 16 66 Q22 32 65 26 Q108 32 114 66 Q118 100 104 132 Z" fill="white"/>
+            <ellipse cx="65" cy="133" rx="20" ry="5" fill="rgba(255,255,255,.6)"/>
+            <path d="M55 26 Q40 6 34 2" stroke="#68B884" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="30" cy="4" rx="9" ry="16" fill="#68B884" opacity=".9" transform="rotate(-15 30 4)"/>
+            <path d="M75 22 Q90 4 98 0" stroke="#5A9A70" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="100" cy="3" rx="8" ry="15" fill="#5A9A70" opacity=".9" transform="rotate(20 100 3)"/>
+          </svg>
+          <div class="gal-title">Home Office Minimalista</div>
+        </div>
+        <div class="gal-over">
+          <div class="gal-lbl">Vasos & Decoração</div>
+          <div class="gal-sl">Design que inspira no dia a dia</div>
+        </div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-bg" style="background:linear-gradient(135deg,#C4ADEE,#9B7FD4);height:100%">
+          <svg width="76" height="84" viewBox="0 0 76 84" fill="none" style="opacity:.72">
+            <path d="M14 66 L38 12 L62 66 Z" fill="white"/>
+            <path d="M19 66 L38 20 L57 66 Z" fill="rgba(255,255,255,.2)"/>
+            <rect x="34" y="66" width="8" height="18" rx="4" fill="rgba(255,255,255,.75)"/>
+            <ellipse cx="38" cy="85" rx="15" ry="4" fill="rgba(255,255,255,.55)"/>
+            <circle cx="38" cy="38" r="7" fill="white"/>
+          </svg>
+          <div class="gal-title">Setup Iluminado</div>
+        </div>
+        <div class="gal-over">
+          <div class="gal-lbl">Luminárias 3D</div>
+          <div class="gal-sl">Luz com personalidade</div>
+        </div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-bg" style="background:linear-gradient(135deg,#3D1E8C,#7C5CBF);height:100%">
+          <svg width="88" height="58" viewBox="0 0 88 58" fill="none" style="opacity:.7">
+            <rect x="2" y="36" width="84" height="20" rx="7" fill="white"/>
+            <rect x="2" y="22" width="58" height="16" rx="7" fill="rgba(255,255,255,.76)"/>
+            <rect x="2" y="10" width="36" height="14" rx="7" fill="rgba(255,255,255,.5)"/>
+            <rect x="16" y="38" width="2" height="16" fill="rgba(255,255,255,.4)"/>
+            <rect x="36" y="38" width="2" height="16" fill="rgba(255,255,255,.4)"/>
+            <rect x="56" y="38" width="2" height="16" fill="rgba(255,255,255,.4)"/>
+          </svg>
+          <div class="gal-title">Organização Elegante</div>
+        </div>
+        <div class="gal-over">
+          <div class="gal-lbl">Organizadores</div>
+          <div class="gal-sl">Praticidade com estética</div>
+        </div>
+      </div>
+      <div class="gal-item g4">
+        <div class="gal-bg" style="background:linear-gradient(135deg,#9B7FD4,#DDD0FF);height:100%;flex-direction:row;gap:28px">
+          <svg width="46" height="76" viewBox="0 0 46 76" fill="none" style="opacity:.78">
+            <circle cx="23" cy="14" r="10" fill="#5E3DAA"/>
+            <rect x="10" y="22" width="26" height="26" rx="6" fill="#7C5CBF"/>
+            <rect x="1" y="24" width="11" height="6" rx="3" fill="#9B7FD4" transform="rotate(-10 1 24)"/>
+            <rect x="34" y="24" width="11" height="6" rx="3" fill="#9B7FD4" transform="rotate(10 34 24)"/>
+            <rect x="11" y="46" width="10" height="22" rx="5" fill="#5E3DAA"/>
+            <rect x="25" y="46" width="10" height="22" rx="5" fill="#5E3DAA"/>
+          </svg>
+          <svg width="46" height="76" viewBox="0 0 46 76" fill="none" style="opacity:.5">
+            <circle cx="23" cy="14" r="10" fill="#3D1E8C"/>
+            <rect x="10" y="22" width="26" height="26" rx="6" fill="#5E3DAA"/>
+            <rect x="1" y="24" width="11" height="6" rx="3" fill="#7C5CBF" transform="rotate(-10 1 24)"/>
+            <rect x="34" y="24" width="11" height="6" rx="3" fill="#7C5CBF" transform="rotate(10 34 24)"/>
+            <rect x="11" y="46" width="10" height="22" rx="5" fill="#3D1E8C"/>
+            <rect x="25" y="46" width="10" height="22" rx="5" fill="#3D1E8C"/>
+          </svg>
+          <div class="gal-title" style="align-self:center">Coleção Figures</div>
+        </div>
+        <div class="gal-over">
+          <div class="gal-lbl">Action Figures</div>
+          <div class="gal-sl">Personagens exclusivos em 3D</div>
+        </div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-bg" style="background:linear-gradient(135deg,#EDE5FF,#C4ADEE);height:100%">
+          <svg width="82" height="60" viewBox="0 0 82 60" fill="none" style="opacity:.72">
+            <rect x="4" y="22" width="74" height="34" rx="9" fill="#7C5CBF"/>
+            <rect x="4" y="18" width="74" height="7" rx="3" fill="#9B7FD4"/>
+            <rect x="9" y="26" width="64" height="27" rx="7" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+            <circle cx="24" cy="44" r="8" fill="rgba(255,255,255,.18)"/>
+            <rect x="40" y="34" width="13" height="16" rx="4" fill="rgba(255,255,255,.18)"/>
+            <circle cx="64" cy="42" r="6" fill="rgba(255,255,255,.18)"/>
+          </svg>
+          <div class="gal-title">Escritório & Sala</div>
+        </div>
+        <div class="gal-over">
+          <div class="gal-lbl">Bandejas & Organização</div>
+          <div class="gal-sl">Elegância no seu espaço</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DEPOIMENTOS ═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background:#fff" id="depoimentos">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ O que os clientes dizem</div>
+      <h2 class="stitle">Amor de verdade</h2>
+      <p class="ssub">Cada peça entregue com carinho — e os clientes percebem isso</p>
+    </div>
+    <div class="testi-grid" id="testiGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER ════════════════════════════════════════════════════════════ -->
+<section class="nl-sec" id="contato">
+  <div class="nl-inner">
+    <div class="nl-badge">✦ Novidades em primeira mão</div>
+    <h2>Fique por dentro dos lançamentos</h2>
+    <p>Receba promoções exclusivas, novos produtos e inspirações de design direto no seu e-mail.</p>
+    <div class="nl-form" id="nlForm">
+      <input type="email" class="nl-input" placeholder="seu@email.com" id="nlInput">
+      <button class="nl-btn" onclick="subscribeNL()">Quero receber →</button>
+    </div>
+    <div class="nl-ok" id="nlOk">🎉 Você está na nossa lista VIP! Obrigada.</div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="flogo">Fábrica Infinita</span>
+        <p class="fdesc">Somos especialistas em impressão 3D criativa. Cada produto é feito com amor, tecnologia e design pensado para transformar seus espaços.</p>
+        <div class="socials">
+          <a href="#" class="soc-a" title="Instagram">📷</a>
+          <a href="#" class="soc-a" title="TikTok">🎵</a>
+          <a href="#" class="soc-a" title="Pinterest">📌</a>
+          <a href="#" class="soc-a" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4>Produtos</h4>
+        <ul>
+          <li><a href="#">Organização</a></li>
+          <li><a href="#">Luminárias</a></li>
+          <li><a href="#">Decoração</a></li>
+          <li><a href="#">Brinquedos</a></li>
+          <li><a href="#">Action Figures</a></li>
+          <li><a href="#">Personalizados</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">Sobre nós</a></li>
+          <li><a href="#">Como funciona</a></li>
+          <li><a href="#">Personalização</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Parceiros</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="#">Política de envio</a></li>
+          <li><a href="#">Trocas & devoluções</a></li>
+          <li><a href="#">Perguntas frequentes</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2025 Fábrica Infinita. Todos os direitos reservados.</span>
+      <span>Feito com ♥ no Brasil · <a href="#">Privacidade</a> · <a href="#">Termos</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const categories=[
+  {name:'Organização',desc:'Organize com estilo',color:'#EDE5FF',ico:'📦'},
+  {name:'Decoração',desc:'Ambientes únicos',color:'#E8F4FF',ico:'✨'},
+  {name:'Luminárias',desc:'Luz & design',color:'#FFF4E8',ico:'💡'},
+  {name:'Brinquedos',desc:'Diversão criativa',color:'#E8FFE8',ico:'🎮'},
+  {name:'Personalizados',desc:'Feito pra você',color:'#FFE8F4',ico:'🎨'},
+  {name:'Vasos',desc:'Natureza com design',color:'#E8FFEE',ico:'🪴'},
+  {name:'Action Figures',desc:'Arte colecionável',color:'#F4E8FF',ico:'🗿'},
+];
+
+const products=[
+  {name:'Luminária Orbital',cat:'Luminárias',price:'R$ 89,90',badge:'Mais Vendido',
+   desc:'Design fluido que transforma qualquer ambiente com luz e sombra únicos.',
+   bg:'linear-gradient(135deg,#F0EAFF 0%,#DDD0FF 100%)',
+   svg:`<svg width="90" height="100" viewBox="0 0 90 100" fill="none"><circle cx="45" cy="42" r="34" fill="rgba(155,127,212,.12)"/><path d="M20 65 L45 18 L70 65 Z" fill="#9B7FD4" opacity=".88"/><path d="M26 65 L45 28 L64 65 Z" fill="rgba(255,255,255,.2)"/><rect x="41" y="65" width="8" height="22" rx="4" fill="#C4ADEE"/><ellipse cx="45" cy="89" rx="18" ry="5" fill="#DDD0FF"/><circle cx="45" cy="44" r="9" fill="rgba(255,255,255,.9)"/><circle cx="45" cy="44" r="4" fill="#9B7FD4"/></svg>`},
+  {name:'Organizador Modular',cat:'Organização',price:'R$ 64,90',badge:'Novo',
+   desc:'Sistema modular personalizável para mesa, escritório e home office.',
+   bg:'linear-gradient(135deg,#E8EEFF 0%,#C4CEFF 100%)',
+   svg:`<svg width="100" height="80" viewBox="0 0 100 80" fill="none"><rect x="6" y="52" width="88" height="22" rx="7" fill="#9B7FD4" opacity=".9"/><rect x="12" y="32" width="62" height="22" rx="7" fill="#A898D8"/><rect x="18" y="14" width="42" height="20" rx="7" fill="#C4ADEE"/><rect x="24" y="4" width="26" height="12" rx="5" fill="#DDD0FF"/><rect x="28" y="54" width="2" height="18" fill="rgba(255,255,255,.35)"/><rect x="50" y="54" width="2" height="18" fill="rgba(255,255,255,.35)"/><rect x="72" y="54" width="2" height="18" fill="rgba(255,255,255,.35)"/></svg>`},
+  {name:'Vaso Minimalista',cat:'Decoração',price:'R$ 49,90',badge:null,
+   desc:'Forma escultural e minimalista para exaltar suas plantas favoritas.',
+   bg:'linear-gradient(135deg,#E8FFF0 0%,#C4F0D4 100%)',
+   svg:`<svg width="75" height="110" viewBox="0 0 75 110" fill="none"><path d="M22 96 Q10 68 14 44 Q18 24 37 20 Q56 24 60 44 Q64 68 52 96 Z" fill="#9B7FD4" opacity=".85"/><path d="M23 92 Q12 66 16 44 Q37 20 35 40 Q30 62 23 92 Z" fill="rgba(255,255,255,.15)"/><ellipse cx="37" cy="97" rx="13" ry="4" fill="#7C5CBF"/><path d="M32 20 Q24 4 18 0" stroke="#68B884" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="16" cy="3" rx="7" ry="12" fill="#68B884" opacity=".9" transform="rotate(-15 16 3)"/><path d="M42 18 Q50 2 56 -1" stroke="#5A9A70" stroke-width="2" stroke-linecap="round"/><ellipse cx="57" cy="2" rx="6" ry="11" fill="#5A9A70" opacity=".9" transform="rotate(20 57 2)"/></svg>`},
+  {name:'Action Figure Custom',cat:'Colecionáveis',price:'R$ 129,90',badge:'Exclusivo',
+   desc:'Personagens únicos modelados em 3D com altíssimo nível de detalhe.',
+   bg:'linear-gradient(135deg,#FFE8E0 0%,#FFCFC4 100%)',
+   svg:`<svg width="65" height="108" viewBox="0 0 65 108" fill="none"><circle cx="32" cy="16" r="13" fill="#C4ADEE" opacity=".95"/><rect x="16" y="27" width="30" height="34" rx="8" fill="#9B7FD4" opacity=".9"/><rect x="2" y="30" width="15" height="7" rx="3.5" fill="#A898D8" transform="rotate(-8 2 30)"/><rect x="48" y="30" width="15" height="7" rx="3.5" fill="#A898D8" transform="rotate(8 48 30)"/><rect x="17" y="59" width="12" height="30" rx="6" fill="#7C5CBF"/><rect x="36" y="59" width="12" height="30" rx="6" fill="#7C5CBF"/><circle cx="26" cy="14" r="2.5" fill="rgba(255,255,255,.85)"/><circle cx="38" cy="14" r="2.5" fill="rgba(255,255,255,.85)"/><path d="M26 21 Q32 25 38 21" stroke="rgba(255,255,255,.85)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>`},
+  {name:'Bandeja Elegance',cat:'Organização',price:'R$ 74,90',badge:'Mais Vendido',
+   desc:'Bandeja decorativa que une funcionalidade e sofisticação em qualquer mesa.',
+   bg:'linear-gradient(135deg,#FFF0E8 0%,#FFD4C4 100%)',
+   svg:`<svg width="110" height="75" viewBox="0 0 110 75" fill="none"><rect x="6" y="28" width="98" height="40" rx="10" fill="#9B7FD4" opacity=".88"/><rect x="6" y="24" width="98" height="8" rx="4" fill="#C4ADEE"/><rect x="11" y="33" width="88" height="31" rx="8" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/><circle cx="30" cy="52" r="10" fill="rgba(255,255,255,.16)"/><rect x="50" y="42" width="16" height="20" rx="4" fill="rgba(255,255,255,.16)"/><circle cx="84" cy="50" r="8" fill="rgba(255,255,255,.16)"/></svg>`},
+  {name:'Chaveiro Personalizado',cat:'Personalizados',price:'R$ 24,90',badge:'Novo',
+   desc:'Mostre sua personalidade onde quer que você vá — 100% personalizado.',
+   bg:'linear-gradient(135deg,#FFE0F4 0%,#FFC4E4 100%)',
+   svg:`<svg width="75" height="98" viewBox="0 0 75 98" fill="none"><circle cx="37" cy="20" r="15" stroke="#9B7FD4" stroke-width="5" fill="none"/><circle cx="37" cy="20" r="9" stroke="#C4ADEE" stroke-width="3" fill="none"/><rect x="35" y="33" width="4" height="12" rx="2" fill="#A898D8"/><path d="M18 46 L37 42 L56 46 L58 90 L37 96 L16 90 Z" fill="#9B7FD4" opacity=".9"/><path d="M22 54 L37 51 L52 54 L53 82 L37 87 L21 82 Z" fill="rgba(255,255,255,.15)"/><text x="37" y="74" text-anchor="middle" font-size="14" fill="white" font-weight="bold" font-family="Poppins,sans-serif">FI</text></svg>`},
+];
+
+const features=[
+  {ico:'⬡',title:'Design Exclusivo',desc:'Cada peça é única. Criamos produtos com estética diferenciada que você não encontra em lojas comuns.'},
+  {ico:'✦',title:'Impressão Premium',desc:'Filamentos de alta qualidade e impressoras de última geração para um acabamento verdadeiramente impecável.'},
+  {ico:'◈',title:'Personalização Total',desc:'Adapte cores, nomes, formas. Criamos exatamente o que você imagina, do jeito que você quer.'},
+  {ico:'◎',title:'Design Moderno',desc:'Referências do Pinterest, Behance e marcas escandinavas — trazemos o melhor do design mundial para você.'},
+  {ico:'▲',title:'Produção Artesanal',desc:'Cada unidade é produzida, revisada e embalada individualmente para garantir perfeição em cada detalhe.'},
+  {ico:'◇',title:'Envio para todo Brasil',desc:'Enviamos para qualquer estado. Embalagem segura, rastreamento em tempo real e entrega pontual garantida.'},
+];
+
+const testimonials=[
+  {name:'Ana Luíza M.',city:'São Paulo, SP',ini:'AL',text:'Comprei o organizador modular e simplesmente me apaixonei! A qualidade é incrível, chegou super bem embalado e ficou lindo na minha escrivaninha. Já indiquei para todas as minhas amigas!'},
+  {name:'Marcos Vieira',city:'Curitiba, PR',ini:'MV',text:'A luminária orbital transformou completamente meu home office. Design moderno, acabamento impecável. Parece que custou 5x mais do que paguei. Vale muito cada centavo!'},
+  {name:'Beatriz Costa',city:'Rio de Janeiro, RJ',ini:'BC',text:'Pedi um chaveiro completamente personalizado com o nome dos meus filhos. Ficou perfeito — detalhe, cor e acabamento além das expectativas. Já é minha loja favorita!'},
+];
+
+function renderCats(){
+  document.getElementById('catsGrid').innerHTML=categories.map(c=>`
+    <div class="cat-card">
+      <div class="cat-ico" style="background:${c.color}"><span>${c.ico}</span></div>
+      <div class="cat-name">${c.name}</div>
+      <div class="cat-desc">${c.desc}</div>
+    </div>
+  `).join('');
+}
+
+function renderProds(){
+  document.getElementById('prodsGrid').innerHTML=products.map(p=>`
+    <div class="prod-card">
+      <div class="prod-img" style="background:${p.bg}">
+        ${p.badge?`<div class="prod-badge">${p.badge}</div>`:''}
+        <button class="prod-wish" onclick="toggleWish(this)">🤍</button>
+        ${p.svg}
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat">${p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-footer">
+          <div class="prod-price">${p.price}</div>
+          <button class="prod-add" onclick="addCart('${p.name}')">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFeats(){
+  document.getElementById('featsGrid').innerHTML=features.map(f=>`
+    <div class="feat-card">
+      <div class="feat-ico">${f.ico}</div>
+      <div class="feat-title">${f.title}</div>
+      <div class="feat-desc">${f.desc}</div>
+    </div>
+  `).join('');
+}
+
+function renderTestis(){
+  document.getElementById('testiGrid').innerHTML=testimonials.map(t=>`
+    <div class="testi-card">
+      <div class="testi-q">"</div>
+      <p class="testi-text">${t.text}</p>
+      <div class="testi-foot">
+        <div class="testi-av">${t.ini}</div>
+        <div>
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-loc">${t.city}</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+let cartCount=0;
+
+function addCart(name){
+  cartCount++;
+  const b=document.getElementById('cartBadge');
+  b.textContent=cartCount;
+  b.style.display='flex';
+  showToast('✓ "'+name+'" adicionado ao carrinho!');
+}
+
+function toggleWish(btn){
+  btn.textContent=btn.textContent==='🤍'?'❤️':'🤍';
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function subscribeNL(){
+  const inp=document.getElementById('nlInput');
+  if(!inp.value||!inp.value.includes('@')){
+    inp.style.borderColor='rgba(255,100,100,.7)';
+    setTimeout(()=>inp.style.borderColor='',1200);
+    return;
+  }
+  document.getElementById('nlForm').style.display='none';
+  document.getElementById('nlOk').style.display='block';
+  showToast('🎉 Bem-vindo(a) à família Fábrica Infinita!');
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>30);
+});
+
+renderCats();
+renderProds();
+renderFeats();
+renderTestis();
+</script>
+</body>
+</html>
