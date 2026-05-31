@@ -59,12 +59,12 @@
     .mobile-menu a:hover{background:var(--lav-l);color:var(--purple-d)}
 
     /* ─ HERO ─ */
-    .hero{min-height:100vh;background:linear-gradient(155deg,var(--lav-xl) 0%,#fff 45%,var(--lav-l) 100%);display:flex;align-items:center;padding:90px 6% 60px;position:relative;overflow:hidden}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:90px 6% 60px;position:relative;overflow:hidden;background:#000}
     .hblob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:glow 5s ease-in-out infinite}
     .hb1{width:650px;height:650px;background:radial-gradient(circle,rgba(124,92,191,.2) 0%,transparent 70%);top:-200px;right:-80px}
     .hb2{width:450px;height:450px;background:radial-gradient(circle,rgba(196,173,238,.18) 0%,transparent 70%);bottom:-120px;left:5%;animation-delay:2.5s}
     .hb3{width:280px;height:280px;background:radial-gradient(circle,rgba(221,208,255,.25) 0%,transparent 70%);top:35%;left:38%;animation-delay:1.2s}
-    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;position:relative}
+    .hero-inner{max-width:700px;margin:0 auto;width:100%;position:relative;z-index:2;text-align:left}
     .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(196,173,238,.4);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--purple-d);margin-bottom:24px}
     .bdot{width:7px;height:7px;border-radius:50%;background:var(--purple-s);animation:glow 2s ease-in-out infinite}
     .hero-title{font-size:clamp(34px,4.5vw,62px);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:20px}
@@ -75,8 +75,8 @@
     .stat-num{font-size:24px;font-weight:800;color:var(--dark)}
     .stat-lbl{font-size:13px;color:var(--light)}
     .hero-visual{position:relative;height:500px;display:flex;align-items:center;justify-content:center}
-    .hero-photo-wrap{position:relative;width:420px;height:480px;animation:float 7s ease-in-out infinite;border-radius:32px;overflow:hidden}
-    .hero-photo{width:100%;height:100%;object-fit:cover;border-radius:32px;box-shadow:0 32px 80px rgba(94,61,170,.22);display:block}
+    .hero-photo-wrap{position:relative;width:100%;height:520px;border-radius:32px;overflow:hidden}
+    .hero-photo{width:100%;height:100%;object-fit:cover;border-radius:32px;box-shadow:0 32px 80px rgba(94,61,170,.22);display:block;animation:float 7s ease-in-out infinite}
     .hero-photo-badge{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border:1px solid rgba(196,173,238,.4);border-radius:50px;padding:10px 22px;display:flex;align-items:center;gap:10px;white-space:nowrap;box-shadow:0 8px 28px rgba(94,61,170,.15)}
     .hero-photo-dot{width:8px;height:8px;border-radius:50%;background:var(--purple-s);animation:glow 2s ease-in-out infinite}
     .hero-photo-txt{font-size:13px;font-weight:600;color:var(--dark)}
@@ -337,17 +337,14 @@
 </div>
 
 <!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="hblob hb1"></div>
-  <div class="hblob hb2"></div>
-  <div class="hblob hb3"></div>
+<section class="hero" style="position:relative"><img src="foto-capa.jpg" alt="Fábrica Infinita" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;filter:brightness(0.75)"><div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(255,255,255,.92) 0%,rgba(255,255,255,.75) 60%,rgba(255,255,255,.3) 100%);z-index:1"></div>
   <div class="hero-inner">
     <div>
       
       <h1 class="hero-title fu1">Soluções 3D<br><span class="grad">inteligentes</span><br>e personalizadas.</h1>
       <p class="hero-sub fu2">Produtos exclusivos em impressão 3D — design criativo e qualidade premium para transformar qualquer ambiente.</p>
       <div class="hero-ctas fu3">
-        <a href="#produtos" class="btn-p">✦ Explorar coleção</a>
+        <a href="#categorias" class="btn-p">✦ Explorar coleção</a>
         <a href="#sobre" class="btn-s">Saiba mais →</a>
       </div>
       <div class="hero-stats fu3">
@@ -355,30 +352,7 @@
         <div><div class="stat-num">4.9★</div><div class="stat-lbl">Avaliação média</div></div>
         <div><div class="stat-num">3.2k</div><div class="stat-lbl">Clientes felizes</div></div>
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-photo-wrap">
-        <img class="hero-photo" src="foto-capa.jpg" alt="Vasos de plantas em impressão 3D sobre mesa de mármore terrazzo">
-        <div class="hero-photo-badge">
-          <span class="hero-photo-dot"></span>
-          <span class="hero-photo-txt">Vasos em impressão 3D</span>
-        </div>
-      </div>
-      <div class="hero-float-card hfc1">
-        <div class="hfc-label">Vaso Minimalista</div>
-        <div class="hfc-price">R$ 49,90</div>
-        <div class="hfc-tag">Mais Vendido</div>
-      </div>
-      <div class="hero-float-card hfc2">
-        <div class="hfc-label">✦ Frete Grátis</div>
-        <div style="font-size:11px;color:var(--light)">Acima de R$ 150</div>
-      </div>
-      <div class="hero-float-card hfc3">
-        <div class="hfc-label">Personalização</div>
-        <div style="font-size:11px;color:var(--light)">100% sob medida</div>
-      </div>
-    </div>
-  </div>
+    </div></div>
 </section>
 
 <!-- ═══ CATEGORIAS ════════════════════════════════════════════════════════════ -->
@@ -409,35 +383,11 @@
       <p class="ssub">Os queridinhos da galera</p>
     </div>
     <div class="prods-grid" id="prodsGrid"></div>
-    <div style="text-align:center;margin-top:48px">
-      <a href="#" class="btn-s" style="font-size:15px">Ver toda a coleção →</a>
-    </div>
+    
   </div>
 </section>
 
 <!-- ═══ POR QUE NÓS ═══════════════════════════════════════════════════════════ -->
-<section class="why-sec" id="depoimentos">
-  <div class="wblob wb1"></div>
-  <div class="wblob wb2"></div>
-  <div class="si">
-    <div class="shd">
-      <div class="stag">✦ Por que a Fábrica Infinita</div>
-      <h2 class="stitle">Feito com o carinho que você merece.</h2>
-      <p class="ssub">Cada peça que produzimos aqui na Fábrica, carrega atenção aos detalhes, trabalho artesanal e muito amor</p>
-    </div>
-    <div class="feats-grid" id="featsGrid"></div>
-
-    <div style="margin-top:56px;padding-top:48px;border-top:1px solid rgba(255,255,255,.1)">
-      <div class="shd" style="margin-bottom:32px">
-        <div class="stag" style="color:var(--lilac)">✦ O que os clientes dizem</div>
-        <h2 class="stitle" style="color:#fff">Feedbacks que amamos</h2>
-        <p class="ssub" style="color:rgba(255,255,255,.55)">Confira a avaliação de alguns clientes sobre nossos produtos e atendimento</p>
-      </div>
-      <div class="testi-grid" id="testiGrid"></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ SOBRE ═══════════════════════════════════════════════════════════════════ -->
 <section class="sobre-sec" id="sobre">
   <div class="sobre-inner">
@@ -460,6 +410,28 @@
         <div><div class="stat-num">3.2k</div><div class="stat-lbl">Clientes felizes</div></div>
         <div><div class="stat-num">4.9★</div><div class="stat-lbl">Avaliação média</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-sec" id="depoimentos">
+  <div class="wblob wb1"></div>
+  <div class="wblob wb2"></div>
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Por que a Fábrica Infinita</div>
+      <h2 class="stitle">Feito com o carinho que você merece.</h2>
+      <p class="ssub">Cada peça que produzimos aqui na Fábrica, carrega atenção aos detalhes, trabalho artesanal e muito amor</p>
+    </div>
+    <div class="feats-grid" id="featsGrid"></div>
+
+    <div style="margin-top:56px;padding-top:48px;border-top:1px solid rgba(255,255,255,.1)">
+      <div class="shd" style="margin-bottom:32px">
+        <div class="stag" style="color:var(--lilac)">✦ O que os clientes dizem</div>
+        <h2 class="stitle" style="color:#fff">Feedbacks que amamos</h2>
+        <p class="ssub" style="color:rgba(255,255,255,.55)">Confira a avaliação de alguns clientes sobre nossos produtos e atendimento</p>
+      </div>
+      <div class="testi-grid" id="testiGrid"></div>
     </div>
   </div>
 </section>
