@@ -410,7 +410,6 @@
   <div class="hblob hb3"></div>
   <div class="hero-inner">
     <div>
-      
       <h1 class="hero-title fu1">Soluções 3D<br><span class="grad">inteligentes</span><br>e personalizadas.</h1>
       <p class="hero-sub fu2">Produtos exclusivos em impressão 3D — design criativo e qualidade premium para transformar qualquer ambiente.</p>
       <div class="hero-ctas fu3">
@@ -422,7 +421,22 @@
         <div><div class="stat-num">4.9★</div><div class="stat-lbl">Avaliação média</div></div>
         <div><div class="stat-num">3.2k</div><div class="stat-lbl">Clientes felizes</div></div>
       </div>
-    </div></div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-photo-wrap" id="carousel">
+        <div class="carousel-slide active"><img src="foto-capa.jpg" alt="Vasos de plantas em impressão 3D"></div>
+        <div class="carousel-slide"><img src="banner2.jpg" alt="Suporte para controle Kraken"></div>
+        <div class="carousel-slide"><img src="banner3.jpg" alt="Chaveiro patinha de gato"></div>
+        <div class="carousel-slide"><img src="banner4.jpg" alt="Suporte headset cacto"></div>
+        <div class="carousel-slide"><img src="banner5.jpg" alt="Luminária 3D"></div>
+        <div class="carousel-slide"><img src="banner6.jpg" alt="Figure futebol"></div>
+        <div class="carousel-slide"><img src="banner7.jpg" alt="Porta-chaves roxo"></div>
+        <button class="carousel-btn prev" onclick="carouselPrev()">‹</button>
+        <button class="carousel-btn next" onclick="carouselNext()">›</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+    </div>
 </section>
 
 <!-- ═══ CATEGORIAS ════════════════════════════════════════════════════════════ -->
@@ -673,46 +687,11 @@
 <script>
 const categories=[
   {name:'Casa',desc:'Organização & decoração',color:'#FFF4E8',ico:'🏠'},
-  {name:'Gamer',desc:'Setup & acessórios',color:'#E8F4FF',ico:'🎮',subs:[
-      {name:'Suporte para controle',desc:'Seu controle em destaque',color:'#E8F4FF',ico:'🎮'},
-      {name:'Suporte para headset',desc:'Headset sempre à mão',color:'#EEF0FF',ico:'🎧'},
-      {name:'Organizador de cabos',desc:'Setup sem bagunça',color:'#E8EEFF',ico:'🔌'},
-      {name:'Suporte para celular',desc:'Celular no lugar certo',color:'#F0EEFF',ico:'📱'},
-      {name:'Porta-cartões de jogo',desc:'Coleção organizada',color:'#E8F8FF',ico:'🃏'},
-      {name:'Dados & acessórios RPG',desc:'Para os mestres do RPG',color:'#F4E8FF',ico:'🎲'},
-    ]},
-  {name:'Pets',desc:'Acessórios para seu pet',color:'#FFF8E8',ico:'🐾',subs:[
-      {name:'Comedouro & bebedouro',desc:'Alimentação com estilo',color:'#FFF8E8',ico:'🍽️'},
-      {name:'Acessórios personalizados',desc:'Feito para o seu pet',color:'#FFF4E8',ico:'🎀'},
-      {name:'Brinquedos',desc:'Diversão para seu pet',color:'#FFFBE8',ico:'🧸'},
-      {name:'Miniaturas',desc:'Versão miniatura do seu pet',color:'#FFF0E8',ico:'🐾'},
-      {name:'Utilidades',desc:'Praticidade para pets',color:'#FFF8F0',ico:'🔧'},
-    ]},
-  {name:'Geek',desc:'Action figures & colecionáveis',color:'#E8F0FF',ico:'🤖',subs:[
-      {name:'Animes',desc:'Personagens e cenas icônicas',color:'#E8F0FF',ico:'⛩️'},
-      {name:'Filmes e Séries',desc:'Seus favoritos em 3D',color:'#EEE8FF',ico:'🎬'},
-      {name:'Games',desc:'Itens do universo gamer',color:'#E8EEFF',ico:'🕹️'},
-      {name:'Colecionáveis',desc:'Peças únicas para colecionar',color:'#F0E8FF',ico:'🏆'},
-      {name:'RPG',desc:'Miniaturas & dados personalizados',color:'#EDE8FF',ico:'🎲'},
-      {name:'Figures',desc:'Action figures exclusivos',color:'#E8EEFF',ico:'🦸'},
-    ]},
-  {name:'Esportes',desc:'Troféus, figures & mais',color:'#E8FFE8',ico:'⚽',subs:[
-      {name:'Copa FIFA 2026',desc:'Edição especial mundial',color:'#E8FFE8',ico:'🏆'},
-      {name:'Placas decorativas',desc:'Mostre seu time com orgulho',color:'#EEFFF0',ico:'🛡️'},
-      {name:'Figures',desc:'Miniaturas de jogadores',color:'#E8FFF4',ico:'⚽'},
-      {name:'Troféus',desc:'Conquistas personalizadas',color:'#FFF8E8',ico:'🥇'},
-      {name:'NFL',desc:'Itens do futebol americano',color:'#E8F0FF',ico:'🏈'},
-      {name:'NBA',desc:'Itens do basquete',color:'#FFE8E8',ico:'🏀'},
-    ]},
-  {name:'Personalizados',desc:'Feito sob encomenda',color:'#F4E8FF',ico:'🎨',subs:[
-      {name:'Chaveiros personalizados',desc:'Identidade única',color:'#F4E8FF',ico:'🔑'},
-      {name:'Aniversários',desc:'Presentes únicos',color:'#FFE8F4',ico:'🎂'},
-      {name:'Formaturas',desc:'Lembranças especiais',color:'#F0E8FF',ico:'🎓'},
-      {name:'Casamentos',desc:'Detalhes inesquecíveis',color:'#FFF0F8',ico:'💍'},
-      {name:'Placas decorativas',desc:'Personalidade nas paredes',color:'#EDE5FF',ico:'🖼️'},
-      {name:'Lembrancinhas',desc:'Mimos personalizados',color:'#FFE8EE',ico:'🎁'},
-      {name:'Maternidade',desc:'Recordações do bebê',color:'#FFF4F8',ico:'👶'},
-    ]},
+  {name:'Gamer',desc:'Setup & acessórios',color:'#E8F4FF',ico:'🎮'},
+  {name:'Pets',desc:'Acessórios para seu pet',color:'#FFF8E8',ico:'🐾'},
+  {name:'Geek',desc:'Action figures & colecionáveis',color:'#E8F0FF',ico:'🤖'},
+  {name:'Esportes',desc:'Troféus, figures & mais',color:'#E8FFE8',ico:'⚽'},
+  {name:'Personalizados',desc:'Feito sob encomenda',color:'#F4E8FF',ico:'🎨'},
 ];
 
 const products=[
