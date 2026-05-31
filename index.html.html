@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fábrica Infinita — Produtos exclusivos em impressão 3D. Design moderno, personalização total e qualidade premium para transformar seu espaço.">
+  <title>Fábrica Infinita — Impressão 3D Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#FAFAFA; --bg2:#F4F0FF; --lav-xl:#F7F3FF; --lav-l:#EDE5FF; --lav:#DDD0FF;
+      --lilac:#C4ADEE; --purple-s:#9B7FD4; --purple-m:#7C5CBF; --purple-d:#5E3DAA;
+      --purple-xd:#3D1E8C; --dark:#1A1728; --dark2:#2D1B5E; --mid:#5A5478; --light:#9895B5;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--lav-xl)}
+    ::-webkit-scrollbar-thumb{background:var(--purple-s);border-radius:3px}
+
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+    @keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+    @keyframes glow{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.55;transform:scale(1.06)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes badgePop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+    @keyframes toastSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+    .fu{animation:fadeUp .7s ease both}
+    .fu1{animation:fadeUp .7s .1s ease both}
+    .fu2{animation:fadeUp .7s .2s ease both}
+    .fu3{animation:fadeUp .7s .3s ease both}
+
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--purple-d),var(--purple-m));color:#fff;border:none;padding:14px 32px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .25s,box-shadow .25s;box-shadow:0 8px 28px rgba(94,61,170,.38)}
+    .btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(94,61,170,.48)}
+    .btn-s{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--purple-d);border:2px solid var(--lilac);padding:12px 28px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:500;font-size:15px;cursor:pointer;text-decoration:none;transition:all .25s}
+    .btn-s:hover{background:var(--lav-l);border-color:var(--purple-s);transform:translateY(-2px)}
+
+    /* ─ NAVBAR ─ */
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 6%;transition:background .3s,box-shadow .3s}
+    .navbar.scrolled{background:rgba(250,250,250,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(196,173,238,.25)}
+    .nav-inner{max-width:1200px;margin:0 auto;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:20px;font-weight:800;letter-spacing:-.5px;text-decoration:none;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .logo small{font-weight:300;font-size:.8em}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--mid);font-size:14px;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--purple-d)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .cart-btn{position:relative;background:none;border:none;cursor:pointer;font-size:20px;color:var(--dark);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .cart-btn:hover{background:var(--lav-l)}
+    .cart-badge{position:absolute;top:4px;right:4px;background:var(--purple-d);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;animation:badgePop .3s ease}
+    .hamburger{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--dark);padding:4px}
+    .mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(250,250,250,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--lav);z-index:998;padding:20px 6%}
+    .mobile-menu.open{display:block}
+    .mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+    .mobile-menu a{display:block;padding:12px 16px;text-decoration:none;color:var(--dark);font-size:16px;font-weight:500;border-radius:12px;transition:background .2s}
+    .mobile-menu a:hover{background:var(--lav-l);color:var(--purple-d)}
+
+    /* ─ HERO ─ */
+    .hero{min-height:100vh;background:linear-gradient(155deg,var(--lav-xl) 0%,#fff 45%,var(--lav-l) 100%);display:flex;align-items:center;padding:90px 6% 60px;position:relative;overflow:hidden}
+    .hblob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:glow 5s ease-in-out infinite}
+    .hb1{width:650px;height:650px;background:radial-gradient(circle,rgba(124,92,191,.2) 0%,transparent 70%);top:-200px;right:-80px}
+    .hb2{width:450px;height:450px;background:radial-gradient(circle,rgba(196,173,238,.18) 0%,transparent 70%);bottom:-120px;left:5%;animation-delay:2.5s}
+    .hb3{width:280px;height:280px;background:radial-gradient(circle,rgba(221,208,255,.25) 0%,transparent 70%);top:35%;left:38%;animation-delay:1.2s}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;position:relative}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(196,173,238,.4);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--purple-d);margin-bottom:24px}
+    .bdot{width:7px;height:7px;border-radius:50%;background:var(--purple-s);animation:glow 2s ease-in-out infinite}
+    .hero-title{font-size:clamp(34px,4.5vw,62px);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:20px}
+    .hero-title .grad{background:linear-gradient(135deg,var(--purple-d) 0%,var(--purple-s) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:var(--mid);line-height:1.7;max-width:440px;margin-bottom:38px;font-weight:400}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+    .hero-stats{display:flex;gap:28px;margin-top:48px;padding-top:32px;border-top:1px solid var(--lav)}
+    .stat-num{font-size:24px;font-weight:800;color:var(--dark)}
+    .stat-lbl{font-size:13px;color:var(--light)}
+    .hero-visual{position:relative;height:500px;display:flex;align-items:center;justify-content:center}
+    .hero-photo-wrap{position:relative;width:420px;height:480px;animation:float 7s ease-in-out infinite}
+    .hero-photo{width:100%;height:100%;object-fit:cover;border-radius:32px;box-shadow:0 32px 80px rgba(94,61,170,.22)}
+    .hero-photo-badge{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border:1px solid rgba(196,173,238,.4);border-radius:50px;padding:10px 22px;display:flex;align-items:center;gap:10px;white-space:nowrap;box-shadow:0 8px 28px rgba(94,61,170,.15)}
+    .hero-photo-dot{width:8px;height:8px;border-radius:50%;background:var(--purple-s);animation:glow 2s ease-in-out infinite}
+    .hero-photo-txt{font-size:13px;font-weight:600;color:var(--dark)}
+    .hero-float-card{position:absolute;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border:1px solid rgba(196,173,238,.4);border-radius:18px;padding:12px 18px;box-shadow:0 12px 36px rgba(94,61,170,.14)}
+    .hfc1{top:8%;right:-10%;animation:float2 9s ease-in-out infinite}
+    .hfc2{top:42%;left:-12%;animation:float2 11s ease-in-out infinite 2s}
+    .hfc3{bottom:14%;right:-8%;animation:float 10s ease-in-out infinite 1s}
+    .hfc-label{font-size:11px;font-weight:600;color:var(--dark)}
+    .hfc-price{font-size:13px;font-weight:800;color:var(--purple-d)}
+    .hfc-tag{font-size:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));border-radius:50px;padding:2px 10px;margin-top:4px;display:inline-block}
+
+    /* ─ SECTION BASE ─ */
+    .section{padding:84px 6%}
+    .si{max-width:1200px;margin:0 auto}
+    .shd{text-align:center;margin-bottom:52px}
+    .stag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple-s);margin-bottom:10px}
+    .stitle{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:10px}
+    .ssub{font-size:16px;color:var(--mid);max-width:480px;margin:0 auto;font-weight:400}
+
+    /* ─ CATEGORIES ─ */
+    .cats-sec{background:linear-gradient(180deg,#fff 0%,var(--lav-xl) 100%)}
+    .cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+    .cat-card{background:#fff;border:1.5px solid var(--lav);border-radius:20px;padding:28px 14px 22px;text-align:center;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden}
+    .cat-card::after{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,var(--lav-l),rgba(255,255,255,0));opacity:0;transition:opacity .3s}
+    .cat-card:hover{border-color:var(--purple-s);transform:translateY(-7px);box-shadow:0 18px 48px rgba(94,61,170,.16),0 0 0 1px rgba(155,127,212,.15)}
+    .cat-card:hover::after{opacity:1}
+    .cat-ico{width:60px;height:60px;border-radius:16px;background:var(--lav-l);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px;transition:background .3s}
+    .cat-card:hover .cat-ico{background:var(--lav)}
+    .cat-name{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:3px}
+    .cat-desc{font-size:12px;color:var(--light)}
+
+    /* ─ PRODUCTS ─ */
+    .prods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+    .prod-card{background:#fff;border:1.5px solid var(--lav);border-radius:24px;overflow:hidden;transition:all .35s ease;position:relative}
+    .prod-card:hover{transform:translateY(-10px);box-shadow:0 28px 64px rgba(94,61,170,.16);border-color:var(--lilac)}
+    .prod-img{height:170px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .prod-badge{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,var(--purple-d),var(--purple-m));color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:50px;letter-spacing:.5px;z-index:2}
+    .prod-wish{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.8);backdrop-filter:blur(8px);border:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;z-index:2}
+    .prod-wish:hover{transform:scale(1.15);background:#fff}
+    .prod-info{padding:14px 18px 18px}
+    .prod-cat{font-size:11px;color:var(--purple-s);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+    .prod-name{font-size:15px;font-weight:700;margin-bottom:6px}
+    .prod-desc{font-size:13px;color:var(--light);line-height:1.55;margin-bottom:16px}
+    .prod-footer{display:flex;align-items:center;justify-content:space-between}
+    .prod-price{font-size:18px;font-weight:800;color:var(--dark)}
+    .prod-add{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--purple-d),var(--purple-m));color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .22s,box-shadow .22s;box-shadow:0 4px 14px rgba(94,61,170,.32)}
+    .prod-add:hover{transform:scale(1.12) rotate(10deg);box-shadow:0 8px 22px rgba(94,61,170,.44)}
+
+    /* ─ WHY US ─ */
+    .why-sec{background:linear-gradient(140deg,var(--dark) 0%,var(--dark2) 100%);padding:84px 6%;position:relative;overflow:hidden}
+    .wblob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px)}
+    .wb1{width:500px;height:500px;background:rgba(124,92,191,.14);top:-150px;right:-100px}
+    .wb2{width:350px;height:350px;background:rgba(196,173,238,.08);bottom:-80px;left:-60px}
+    .why-sec .stag{color:var(--lilac)}
+    .why-sec .stitle{color:#fff}
+    .why-sec .ssub{color:rgba(255,255,255,.55)}
+    .feats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+    .feat-card{background:rgba(255,255,255,.04);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:24px 20px;transition:all .3s}
+    .feat-card:hover{background:rgba(255,255,255,.07);border-color:rgba(196,173,238,.25);transform:translateY(-5px)}
+    .feat-ico{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;box-shadow:0 8px 22px rgba(94,61,170,.45)}
+    .feat-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+    .feat-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
+
+    /* ─ GALLERY ─ */
+    .gal-sec{background:var(--lav-xl)}
+    .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 220px;gap:14px}
+    .gal-item{border-radius:20px;overflow:hidden;position:relative;cursor:pointer}
+    .gal-item.g1{grid-column:1/3;grid-row:1/3}
+    .gal-item.g4{grid-column:3/5}
+    .gal-bg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:transform .4s ease}
+    .gal-item:hover .gal-bg{transform:scale(1.05)}
+    .gal-over{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;background:linear-gradient(transparent,rgba(26,23,40,.65));color:#fff;opacity:0;transition:opacity .3s}
+    .gal-item:hover .gal-over{opacity:1}
+    .gal-lbl{font-size:15px;font-weight:600}
+    .gal-sl{font-size:12px;opacity:.75}
+    .gal-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.65);text-align:center}
+
+    /* ─ TESTIMONIALS ─ */
+    .testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+    .testi-card{background:#fff;border:1.5px solid var(--lav);border-radius:24px;padding:30px 32px;transition:all .3s}
+    .testi-card:hover{border-color:var(--lilac);box-shadow:0 12px 36px rgba(94,61,170,.12);transform:translateY(-5px)}
+    .testi-q{font-size:52px;line-height:1;color:var(--lav);font-family:Georgia,serif;margin-bottom:4px}
+    .testi-text{font-size:15px;color:var(--mid);font-style:italic;line-height:1.7;margin-bottom:22px}
+    .testi-foot{display:flex;align-items:center;gap:12px}
+    .testi-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .testi-name{font-weight:700;font-size:15px}
+    .testi-loc{font-size:13px;color:var(--light)}
+    .testi-stars{color:#F5A623;font-size:13px;margin-top:1px}
+
+    /* ─ NEWSLETTER ─ */
+    .nl-sec{background:linear-gradient(140deg,var(--purple-d) 0%,var(--purple-m) 100%);padding:84px 6%;position:relative;overflow:hidden}
+    .nl-sec::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.07);top:-300px;right:-150px;pointer-events:none}
+    .nl-sec::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.05);bottom:-150px;left:5%;pointer-events:none}
+    .nl-inner{max-width:580px;margin:0 auto;text-align:center;position:relative}
+    .nl-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:12px;font-weight:600;letter-spacing:1px;padding:6px 14px;border-radius:50px;margin-bottom:18px}
+    .nl-inner h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.5px}
+    .nl-inner p{font-size:16px;color:rgba(255,255,255,.7);margin-bottom:34px}
+    .nl-form{display:flex;gap:10px;max-width:460px;margin:0 auto}
+    .nl-input{flex:1;padding:14px 20px;border-radius:50px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-family:'Poppins',sans-serif;outline:none;transition:border-color .2s}
+    .nl-input::placeholder{color:rgba(255,255,255,.55)}
+    .nl-input:focus{border-color:rgba(255,255,255,.65)}
+    .nl-btn{padding:14px 26px;background:#fff;color:var(--purple-d);border:none;border-radius:50px;font-weight:700;font-size:14px;font-family:'Poppins',sans-serif;cursor:pointer;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+    .nl-btn:hover{transform:scale(1.04);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+    .nl-ok{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:14px 22px;color:#fff;font-weight:600;font-size:15px;display:none;font-family:'Poppins',sans-serif}
+
+    /* ─ FOOTER ─ */
+    .footer{background:var(--dark);padding:64px 6% 32px}
+    .footer-inner{max-width:1200px;margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:48px;align-items:start}
+    .flogo{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--lilac),var(--purple-s));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;display:block;letter-spacing:-.4px}
+    .fdesc{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:0}
+    .socials{display:flex;gap:10px}
+    .soc-a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;color:rgba(255,255,255,.65);transition:all .2s}
+    .soc-a:hover{background:var(--purple-d);border-color:var(--purple-s);transform:translateY(-2px);color:#fff}
+    .fcol h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:.3px}
+    .fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .fcol a{color:rgba(255,255,255,.48);font-size:14px;text-decoration:none;transition:color .2s}
+    .fcol a:hover{color:var(--lilac)}
+    .fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:10px}
+    .fbot a{color:rgba(255,255,255,.45);text-decoration:none}
+    .fbot a:hover{color:var(--lilac)}
+
+    /* ─ INSTAGRAM ─ */
+    .insta-sec{background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);padding:60px 6%;text-align:center;position:relative;overflow:hidden}
+    .insta-sec::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.07);top:-200px;right:-100px;pointer-events:none}
+    .insta-sec::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.05);bottom:-150px;left:-50px;pointer-events:none}
+    .insta-inner{max-width:600px;margin:0 auto;position:relative}
+    .insta-ico{width:72px;height:72px;background:rgba(255,255,255,.15);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3)}
+    .insta-sec h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.5px}
+    .insta-sec p{font-size:16px;color:rgba(255,255,255,.8);margin-bottom:28px}
+    .insta-handle{font-size:18px;font-weight:700;color:#fff;margin-bottom:32px;display:block}
+    .insta-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#c13584;border:none;padding:14px 32px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .25s,box-shadow .25s;box-shadow:0 8px 28px rgba(0,0,0,.2)}
+    .insta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.3)}
+    /* ─ SOBRE ─ */
+    .sobre-sec{background:linear-gradient(155deg,var(--lav-xl) 0%,#fff 50%,var(--lav-l) 100%);padding:84px 6%;position:relative;overflow:hidden}
+    .sobre-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .sobre-foto{border-radius:32px;overflow:hidden;position:relative}
+    .sobre-foto img{width:100%;height:420px;object-fit:cover;display:block;border-radius:32px}
+    .sobre-foto-placeholder{width:100%;height:420px;border-radius:32px;background:linear-gradient(135deg,var(--lav-l),var(--lav));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:2px dashed var(--lilac)}
+    .sobre-badge{display:inline-flex;align-items:center;gap:8px;background:var(--lav-l);border:1.5px solid var(--lilac);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--purple-d);margin-bottom:20px}
+    .sobre-title{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin-bottom:16px;line-height:1.15}
+    .sobre-title .grad{background:linear-gradient(135deg,var(--purple-d),var(--purple-s));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sobre-text{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:24px}
+    .sobre-stats{display:flex;gap:24px;margin-top:32px;padding-top:28px;border-top:1.5px solid var(--lav)}
+    @media(max-width:768px){.sobre-inner{grid-template-columns:1fr}}
+    /* ─ CONTATO ─ */
+    .contato-sec{background:#fff;padding:84px 6%}
+    .contato-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto}
+    .contato-card{background:var(--lav-xl);border:1.5px solid var(--lav);border-radius:22px;padding:32px 24px;text-align:center;transition:all .3s}
+    .contato-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(94,61,170,.14);border-color:var(--lilac)}
+    .contato-ico{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+    .contato-label{font-size:13px;font-weight:600;color:var(--light);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+    .contato-value{font-size:15px;font-weight:700;color:var(--dark)}
+    .contato-link{text-decoration:none;color:inherit;display:block}
+    /* ─ POPUP ─ */
+    .popup-overlay{position:fixed;inset:0;background:rgba(26,23,40,.55);backdrop-filter:blur(6px);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px}
+    .popup-overlay.open{display:flex}
+    .popup-box{background:#fff;border-radius:24px;padding:40px;max-width:520px;width:100%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.2);animation:fadeUp .3s ease}
+    .popup-close{position:absolute;top:16px;right:16px;background:var(--lav-l);border:none;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--purple-d);transition:background .2s}
+    .popup-close:hover{background:var(--lav)}
+    .popup-ico{width:54px;height:54px;border-radius:15px;background:linear-gradient(135deg,var(--purple-d),var(--purple-s));display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 6px 18px rgba(94,61,170,.3)}
+    .popup-title{font-size:20px;font-weight:800;color:var(--dark);margin-bottom:14px;letter-spacing:-.5px}
+    .popup-text{font-size:14px;color:var(--mid);line-height:1.8;margin-bottom:14px}
+    /* ─ TOAST ─ */
+    .toast{position:fixed;bottom:28px;right:28px;background:var(--dark);color:#fff;font-size:14px;font-weight:500;padding:14px 22px;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.25);border-left:4px solid var(--purple-s);opacity:0;transform:translateY(12px);transition:all .3s;z-index:9999;pointer-events:none;font-family:'Poppins',sans-serif}
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    /* ─ RESPONSIVE ─ */
+    @media(max-width:900px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{display:none}
+      .footer-top{grid-template-columns:1fr 1fr}
+      .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+      .gal-item.g1{grid-column:1/2;grid-row:1/2}
+      .gal-item.g4{grid-column:1/3}
+    }
+    @media(max-width:600px){
+      .nav-links{display:none}
+      .hamburger{display:block}
+      .section{padding:60px 5%}
+      .why-sec{padding:60px 5%}
+      .nl-sec{padding:60px 5%}
+      .footer{padding:60px 5% 32px}
+      .footer-top{grid-template-columns:1fr}
+      .gal-grid{grid-template-columns:1fr;grid-template-rows:none}
+      .gal-item.g1,.gal-item.g4{grid-column:auto;grid-row:auto}
+      .nl-form{flex-direction:column}
+      .hero-stats{gap:18px}
+      .hero-ctas{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+<!-- POPUP ENVIO -->
+<div class="popup-overlay" id="envioPopup" onclick="closeEnvioPopup(event)">
+  <div class="popup-box">
+    <button class="popup-close" onclick="document.getElementById('envioPopup').classList.remove('open')">✕</button>
+    <div class="popup-ico">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    </div>
+    <div class="popup-title">Política de Envio</div>
+    <p class="popup-text"><strong>🚚 Transportadoras</strong><br>Trabalhamos com o Melhor Envio, plataforma que reúne as melhores transportadoras do Brasil, garantindo o melhor custo-benefício para cada região.</p>
+    <p class="popup-text"><strong>⏱️ Prazo de produção</strong><br>O prazo de produção varia de acordo com cada produto. Você encontra essa informação nos detalhes de cada item aqui no nosso site.</p>
+    <p class="popup-text"><strong>📍 Prazo de entrega</strong><br>Os prazos variam de acordo com a sua região e o calendário de dias úteis. Calcule o prazo para o seu endereço usando nossa calculadora de CEP, disponível antes de adicionar o pedido ao carrinho.</p>
+    <p class="popup-text"><strong>📱 Código de rastreio</strong><br>Assim que seu pedido for enviado, você receberá o código de rastreamento direto no WhatsApp cadastrado no momento da compra.</p>
+  </div>
+</div>
+
+<!-- POPUP TROCAS -->
+<div class="popup-overlay" id="trocasPopup" onclick="closePopup(event)">
+  <div class="popup-box">
+    <button class="popup-close" onclick="document.getElementById('trocasPopup').classList.remove('open')">✕</button>
+    <div class="popup-ico">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+    <div class="popup-title">Trocas & Devoluções</div>
+    <p class="popup-text">Todos os nossos produtos são criados do zero, personalizados e passam por um rigoroso processo de <strong>revisão e acabamento manual</strong> antes de serem enviados. Por isso, garantimos que nenhuma peça sai da Fábrica Infinita com defeito.</p>
+    <p class="popup-text">Por se tratarem de produtos personalizados e produzidos sob encomenda, <strong>não realizamos trocas ou devoluções por arrependimento</strong>. Porém, caso você receba algum produto com avaria causada pelo transporte, entre em contato conosco pelo WhatsApp que resolveremos com todo o carinho!</p>
+    <a href="https://wa.me/5551998714709" target="_blank" class="btn-p" style="font-size:13px;padding:10px 22px">💬 Falar pelo WhatsApp</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="#">Fábrica<small> Infinita</small></a>
+    <ul class="nav-links">
+      <li><a href="#categorias">Categorias</a></li>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartBtn" title="Carrinho">
+        🛒
+        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+      </button>
+      <a href="#produtos" class="btn-p" style="padding:10px 22px;font-size:13px">Comprar</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#categorias" onclick="toggleMenu()">Categorias</a></li>
+    <li><a href="#produtos" onclick="toggleMenu()">Produtos</a></li>
+    <li><a href="#sobre" onclick="toggleMenu()">Sobre nós</a></li>
+    <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
+  </ul>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hblob hb1"></div>
+  <div class="hblob hb2"></div>
+  <div class="hblob hb3"></div>
+  <div class="hero-inner">
+    <div>
+      
+      <h1 class="hero-title fu1">Soluções 3D<br><span class="grad">inteligentes</span><br>e personalizadas.</h1>
+      <p class="hero-sub fu2">Produtos exclusivos em impressão 3D — design criativo e qualidade premium para transformar qualquer ambiente.</p>
+      <div class="hero-ctas fu3">
+        <a href="#produtos" class="btn-p">✦ Explorar coleção</a>
+        <a href="#sobre" class="btn-s">Saiba mais →</a>
+      </div>
+      <div class="hero-stats fu3">
+        <div><div class="stat-num">800+</div><div class="stat-lbl">Produtos únicos</div></div>
+        <div><div class="stat-num">4.9★</div><div class="stat-lbl">Avaliação média</div></div>
+        <div><div class="stat-num">3.2k</div><div class="stat-lbl">Clientes felizes</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="foto-capa.jpg" alt="Vasos de plantas em impressão 3D sobre mesa de mármore terrazzo">
+        <div class="hero-photo-badge">
+          <span class="hero-photo-dot"></span>
+          <span class="hero-photo-txt">Vasos em impressão 3D</span>
+        </div>
+      </div>
+      <div class="hero-float-card hfc1">
+        <div class="hfc-label">Vaso Minimalista</div>
+        <div class="hfc-price">R$ 49,90</div>
+        <div class="hfc-tag">Mais Vendido</div>
+      </div>
+      <div class="hero-float-card hfc2">
+        <div class="hfc-label">✦ Frete Grátis</div>
+        <div style="font-size:11px;color:var(--light)">Acima de R$ 150</div>
+      </div>
+      <div class="hero-float-card hfc3">
+        <div class="hfc-label">Personalização</div>
+        <div style="font-size:11px;color:var(--light)">100% sob medida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATEGORIAS ════════════════════════════════════════════════════════════ -->
+<section class="section cats-sec" id="categorias">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Navegue por categoria</div>
+      <h2 class="stitle">Encontre o que você ama</h2>
+      <p class="ssub">Produtos criados com design e propósito para cada estilo de vida</p>
+    </div>
+    <div class="cats-grid" id="catsGrid"></div>
+    <div id="subcatSection" style="display:none;margin-top:40px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+        <div><div class="stag">✦ Subcategorias de</div><h3 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;color:var(--dark)" id="subcatTitle"></h3></div>
+        <button onclick="closeSubcat()" style="background:var(--lav-l);border:1.5px solid var(--lilac);border-radius:50px;padding:8px 20px;font-size:13px;font-weight:600;color:var(--purple-d);cursor:pointer;font-family:Poppins,sans-serif">✕ Fechar</button>
+      </div>
+      <div class="cats-grid" id="subcatGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUTOS ══════════════════════════════════════════════════════════════ -->
+<section class="section" id="produtos" style="background:#fff">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Seleção especial</div>
+      <h2 class="stitle">Mais vendidos</h2>
+      <p class="ssub">Os queridinhos da galera</p>
+    </div>
+    <div class="prods-grid" id="prodsGrid"></div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#" class="btn-s" style="font-size:15px">Ver toda a coleção →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POR QUE NÓS ═══════════════════════════════════════════════════════════ -->
+<section class="why-sec" id="sobre">
+  <div class="wblob wb1"></div>
+  <div class="wblob wb2"></div>
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Por que a Fábrica Infinita</div>
+      <h2 class="stitle">Feito com o carinho que você merece.</h2>
+      <p class="ssub">Cada peça que produzimos aqui na Fábrica, carrega atenção aos detalhes, trabalho artesanal e muito amor</p>
+    </div>
+    <div class="feats-grid" id="featsGrid"></div>
+  </div>
+</section>
+
+
+
+<!-- ═══ DEPOIMENTOS ═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background:#fff" id="depoimentos">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ O que os clientes dizem</div>
+      <h2 class="stitle">Feedbacks que amamos</h2>
+      <p class="ssub">Confira a avaliação de alguns clientes sobre nossos produtos e atendimento</p>
+    </div>
+    <div class="testi-grid" id="testiGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ SOBRE ═══════════════════════════════════════════════════════════════════ -->
+<section class="sobre-sec" id="sobre">
+  <div class="sobre-inner">
+    <div class="sobre-foto">
+      <div class="sobre-foto-placeholder">
+        <span style="font-size:48px">📸</span>
+        <span style="font-size:14px;font-weight:600;color:var(--purple-s)">Adicione uma foto de vocês</span>
+        <span style="font-size:12px;color:var(--light)">Renomeie para foto-sobre.jpg</span>
+      </div>
+    </div>
+    <div>
+      <div class="sobre-badge">
+        <span style="font-size:16px">💜</span> Nossa história
+      </div>
+      <h2 class="sobre-title">Feito por quem <span class="grad">ama</span> o que faz</h2>
+      <p class="sobre-text">
+        Oiê, como vai? Nós somos <strong>Amanda e Wandré</strong>, um casal gaúcho que sonhava em ter uma impressora 3D para dar vida às nossas ideias — até que esse sonho se tornou realidade.
+      </p>
+      <p class="sobre-text">
+        Hoje a <strong>Fábrica Infinita</strong> é não somente uma marca, mas um projeto de amor e criatividade que leva soluções inteligentes para o lar de diversas pessoas.
+      </p>
+      <div class="sobre-stats">
+        <div><div class="stat-num">800+</div><div class="stat-lbl">Produtos únicos</div></div>
+        <div><div class="stat-num">3.2k</div><div class="stat-lbl">Clientes felizes</div></div>
+        <div><div class="stat-num">4.9★</div><div class="stat-lbl">Avaliação média</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTATO ═════════════════════════════════════════════════════════════════ -->
+<section class="contato-sec" id="contato">
+  <div class="si">
+    <div class="shd">
+      <div class="stag">✦ Fale com a gente</div>
+      <h2 class="stitle">Entre em contato</h2>
+      <p class="ssub">Estamos sempre prontos para te atender com carinho e agilidade</p>
+    </div>
+    <div class="contato-grid">
+      <a href="mailto:infinitafabrica@gmail.com" class="contato-link">
+        <div class="contato-card">
+          <div class="contato-ico" style="background:var(--lav-l)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7C5CBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="3"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+          </div>
+          <div class="contato-label">E-mail</div>
+          <div class="contato-value">infinitafabrica@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/fabricainfinita" target="_blank" class="contato-link">
+        <div class="contato-card">
+          <div class="contato-ico" style="background:#fce4ec">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e91e63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="#e91e63" stroke="none"/>
+            </svg>
+          </div>
+          <div class="contato-label">Instagram</div>
+          <div class="contato-value">@fabricainfinita</div>
+        </div>
+      </a>
+      <a href="https://tiktok.com/@fabricainfinita" target="_blank" class="contato-link">
+        <div class="contato-card">
+          <div class="contato-ico" style="background:#e8f5e9">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#000" >
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+            </svg>
+          </div>
+          <div class="contato-label">TikTok</div>
+          <div class="contato-value">@fabricainfinita</div>
+        </div>
+      </a>
+      <a href="https://wa.me/5551998714709" target="_blank" class="contato-link">
+        <div class="contato-card">
+          <div class="contato-ico" style="background:#e8f5e9">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#25D366">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+          </div>
+          <div class="contato-label">WhatsApp</div>
+          <div class="contato-value">Clique para conversar</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INSTAGRAM ═══════════════════════════════════════════════════════════════ -->
+<section class="insta-sec">
+  <div class="insta-inner" style="max-width:900px">
+    <div style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:16px">
+      <div class="insta-ico" style="margin:0;width:52px;height:52px;flex-shrink:0">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/>
+        </svg>
+      </div>
+      <div style="text-align:left">
+        <h2 style="margin:0;font-size:clamp(20px,3vw,30px)">Siga a gente no Instagram!</h2>
+        <span class="insta-handle" style="display:block;margin:4px 0 0;font-size:15px">@fabricainfinita</span>
+      </div>
+    </div>
+    <p style="margin-bottom:24px">Bastidores de produção, lançamentos exclusivos e muito conteúdo sobre impressão 3D. Vem fazer parte da nossa comunidade!</p>
+    <a href="https://instagram.com/fabricainfinita" target="_blank" style="display:block;margin-bottom:24px">
+      <img src="feed-instagram.png" alt="Feed do Instagram @fabricainfinita"
+        style="width:100%;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.25);display:block">
+    </a>
+    <a href="https://instagram.com/fabricainfinita" target="_blank" class="insta-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="5"/>
+        <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+      Seguir no Instagram
+    </a>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER ════════════════════════════════════════════════════════════ -->
+<section class="nl-sec" id="contato">
+  <div class="nl-inner">
+    <div class="nl-badge">✦ Novidades em primeira mão</div>
+    <h2>Fique por dentro dos lançamentos</h2>
+    <p>Receba promoções exclusivas, novos produtos e inspirações de design direto no seu e-mail.</p>
+    <div class="nl-form" id="nlForm">
+      <input type="email" class="nl-input" placeholder="seu@email.com" id="nlInput">
+      <button class="nl-btn" onclick="subscribeNL()">Quero receber →</button>
+    </div>
+    <div class="nl-ok" id="nlOk">🎉 Você está na nossa lista VIP! Obrigada.</div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="flogo">Nos siga nas redes</span>
+        <div class="socials">
+          <a href="#" class="soc-a" title="Instagram" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" class="soc-a" title="TikTok" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+            </svg>
+          </a>
+          <a href="#" class="soc-a" title="WhatsApp" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4>Produtos</h4>
+        <ul>
+          <li><a href="#">Organização</a></li>
+          <li><a href="#">Luminárias</a></li>
+          <li><a href="#">Decoração</a></li>
+          <li><a href="#">Brinquedos</a></li>
+          <li><a href="#">Action Figures</a></li>
+          <li><a href="#">Personalizados</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#" onclick="document.getElementById('envioPopup').classList.add('open');return false;">Política de envio</a></li>
+          <li><a href="#" onclick="document.getElementById('trocasPopup').classList.add('open');return false;">Trocas & devoluções</a></li>
+          <li><a href="#">Perguntas frequentes</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2025 Fábrica Infinita. Todos os direitos reservados.</span>
+      <span>Cachoeirinha, Rio Grande do Sul, Brasil · <a href="#">Privacidade</a> · <a href="#">Termos</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const categories=[
+  {name:'Casa',desc:'Organização & decoração',color:'#FFF4E8',ico:'🏠'},
+  {name:'Gamer',desc:'Setup & acessórios',color:'#E8F4FF',ico:'🎮',subs:[
+      {name:'Suporte para controle',desc:'Seu controle em destaque',color:'#E8F4FF',ico:'🎮'},
+      {name:'Suporte para headset',desc:'Headset sempre à mão',color:'#EEF0FF',ico:'🎧'},
+      {name:'Organizador de cabos',desc:'Setup sem bagunça',color:'#E8EEFF',ico:'🔌'},
+      {name:'Suporte para celular',desc:'Celular no lugar certo',color:'#F0EEFF',ico:'📱'},
+      {name:'Porta-cartões de jogo',desc:'Coleção organizada',color:'#E8F8FF',ico:'🃏'},
+      {name:'Dados & acessórios RPG',desc:'Para os mestres do RPG',color:'#F4E8FF',ico:'🎲'},
+    ]},
+  {name:'Pets',desc:'Acessórios para seu pet',color:'#FFF8E8',ico:'🐾',subs:[
+      {name:'Comedouro & bebedouro',desc:'Alimentação com estilo',color:'#FFF8E8',ico:'🍽️'},
+      {name:'Acessórios personalizados',desc:'Feito para o seu pet',color:'#FFF4E8',ico:'🎀'},
+      {name:'Brinquedos',desc:'Diversão para seu pet',color:'#FFFBE8',ico:'🧸'},
+      {name:'Miniaturas',desc:'Versão miniatura do seu pet',color:'#FFF0E8',ico:'🐾'},
+      {name:'Utilidades',desc:'Praticidade para pets',color:'#FFF8F0',ico:'🔧'},
+    ]},
+  {name:'Geek',desc:'Action figures & colecionáveis',color:'#E8F0FF',ico:'🤖',subs:[
+      {name:'Animes',desc:'Personagens e cenas icônicas',color:'#E8F0FF',ico:'⛩️'},
+      {name:'Filmes e Séries',desc:'Seus favoritos em 3D',color:'#EEE8FF',ico:'🎬'},
+      {name:'Games',desc:'Itens do universo gamer',color:'#E8EEFF',ico:'🕹️'},
+      {name:'Colecionáveis',desc:'Peças únicas para colecionar',color:'#F0E8FF',ico:'🏆'},
+      {name:'RPG',desc:'Miniaturas & dados personalizados',color:'#EDE8FF',ico:'🎲'},
+      {name:'Figures',desc:'Action figures exclusivos',color:'#E8EEFF',ico:'🦸'},
+    ]},
+  {name:'Esportes',desc:'Troféus, figures & mais',color:'#E8FFE8',ico:'⚽',subs:[
+      {name:'Copa FIFA 2026',desc:'Edição especial mundial',color:'#E8FFE8',ico:'🏆'},
+      {name:'Placas decorativas',desc:'Mostre seu time com orgulho',color:'#EEFFF0',ico:'🛡️'},
+      {name:'Figures',desc:'Miniaturas de jogadores',color:'#E8FFF4',ico:'⚽'},
+      {name:'Troféus',desc:'Conquistas personalizadas',color:'#FFF8E8',ico:'🥇'},
+      {name:'NFL',desc:'Itens do futebol americano',color:'#E8F0FF',ico:'🏈'},
+      {name:'NBA',desc:'Itens do basquete',color:'#FFE8E8',ico:'🏀'},
+    ]},
+  {name:'Personalizados',desc:'Feito sob encomenda',color:'#F4E8FF',ico:'🎨',subs:[
+      {name:'Chaveiros personalizados',desc:'Identidade única',color:'#F4E8FF',ico:'🔑'},
+      {name:'Aniversários',desc:'Presentes únicos',color:'#FFE8F4',ico:'🎂'},
+      {name:'Formaturas',desc:'Lembranças especiais',color:'#F0E8FF',ico:'🎓'},
+      {name:'Casamentos',desc:'Detalhes inesquecíveis',color:'#FFF0F8',ico:'💍'},
+      {name:'Placas decorativas',desc:'Personalidade nas paredes',color:'#EDE5FF',ico:'🖼️'},
+      {name:'Lembrancinhas',desc:'Mimos personalizados',color:'#FFE8EE',ico:'🎁'},
+      {name:'Maternidade',desc:'Recordações do bebê',color:'#FFF4F8',ico:'👶'},
+    ]},
+];
+
+const products=[
+  {name:'Vaso Bubble',cat:'Luminárias',price:'R$ 89,90',badge:'Mais Vendido',
+   desc:'Design fluido que transforma qualquer ambiente com luz e sombra únicos.',
+   bg:'linear-gradient(135deg,#F0EAFF 0%,#DDD0FF 100%)',
+   svg:`<svg width="90" height="100" viewBox="0 0 90 100" fill="none"><circle cx="45" cy="42" r="34" fill="rgba(155,127,212,.12)"/><path d="M20 65 L45 18 L70 65 Z" fill="#9B7FD4" opacity=".88"/><path d="M26 65 L45 28 L64 65 Z" fill="rgba(255,255,255,.2)"/><rect x="41" y="65" width="8" height="22" rx="4" fill="#C4ADEE"/><ellipse cx="45" cy="89" rx="18" ry="5" fill="#DDD0FF"/><circle cx="45" cy="44" r="9" fill="rgba(255,255,255,.9)"/><circle cx="45" cy="44" r="4" fill="#9B7FD4"/></svg>`},
+  {name:'Bandeja Orgânica',cat:'Organização',price:'R$ 64,90',badge:'Novo',
+   desc:'Sistema modular personalizável para mesa, escritório e home office.',
+   bg:'linear-gradient(135deg,#E8EEFF 0%,#C4CEFF 100%)',
+   svg:`<svg width="100" height="80" viewBox="0 0 100 80" fill="none"><rect x="6" y="52" width="88" height="22" rx="7" fill="#9B7FD4" opacity=".9"/><rect x="12" y="32" width="62" height="22" rx="7" fill="#A898D8"/><rect x="18" y="14" width="42" height="20" rx="7" fill="#C4ADEE"/><rect x="24" y="4" width="26" height="12" rx="5" fill="#DDD0FF"/><rect x="28" y="54" width="2" height="18" fill="rgba(255,255,255,.35)"/><rect x="50" y="54" width="2" height="18" fill="rgba(255,255,255,.35)"/><rect x="72" y="54" width="2" height="18" fill="rgba(255,255,255,.35)"/></svg>`},
+  {name:'Figure Saci Colorado',cat:'Decoração',price:'R$ 49,90',badge:null,
+   desc:'Forma escultural e minimalista para exaltar suas plantas favoritas.',
+   bg:'linear-gradient(135deg,#E8FFF0 0%,#C4F0D4 100%)',
+   svg:`<svg width="75" height="110" viewBox="0 0 75 110" fill="none"><path d="M22 96 Q10 68 14 44 Q18 24 37 20 Q56 24 60 44 Q64 68 52 96 Z" fill="#9B7FD4" opacity=".85"/><path d="M23 92 Q12 66 16 44 Q37 20 35 40 Q30 62 23 92 Z" fill="rgba(255,255,255,.15)"/><ellipse cx="37" cy="97" rx="13" ry="4" fill="#7C5CBF"/><path d="M32 20 Q24 4 18 0" stroke="#68B884" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="16" cy="3" rx="7" ry="12" fill="#68B884" opacity=".9" transform="rotate(-15 16 3)"/><path d="M42 18 Q50 2 56 -1" stroke="#5A9A70" stroke-width="2" stroke-linecap="round"/><ellipse cx="57" cy="2" rx="6" ry="11" fill="#5A9A70" opacity=".9" transform="rotate(20 57 2)"/></svg>`},
+  {name:'Taça Copa FIFA 2026',cat:'Colecionáveis',price:'R$ 129,90',badge:'Exclusivo',
+   desc:'Personagens únicos modelados em 3D com altíssimo nível de detalhe.',
+   bg:'linear-gradient(135deg,#FFE8E0 0%,#FFCFC4 100%)',
+   svg:`<svg width="65" height="108" viewBox="0 0 65 108" fill="none"><circle cx="32" cy="16" r="13" fill="#C4ADEE" opacity=".95"/><rect x="16" y="27" width="30" height="34" rx="8" fill="#9B7FD4" opacity=".9"/><rect x="2" y="30" width="15" height="7" rx="3.5" fill="#A898D8" transform="rotate(-8 2 30)"/><rect x="48" y="30" width="15" height="7" rx="3.5" fill="#A898D8" transform="rotate(8 48 30)"/><rect x="17" y="59" width="12" height="30" rx="6" fill="#7C5CBF"/><rect x="36" y="59" width="12" height="30" rx="6" fill="#7C5CBF"/><circle cx="26" cy="14" r="2.5" fill="rgba(255,255,255,.85)"/><circle cx="38" cy="14" r="2.5" fill="rgba(255,255,255,.85)"/><path d="M26 21 Q32 25 38 21" stroke="rgba(255,255,255,.85)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>`},
+  {name:'Porta Pincéis Canelado',cat:'Organização',price:'R$ 74,90',badge:'Mais Vendido',
+   desc:'Bandeja decorativa que une funcionalidade e sofisticação em qualquer mesa.',
+   bg:'linear-gradient(135deg,#FFF0E8 0%,#FFD4C4 100%)',
+   svg:`<svg width="110" height="75" viewBox="0 0 110 75" fill="none"><rect x="6" y="28" width="98" height="40" rx="10" fill="#9B7FD4" opacity=".88"/><rect x="6" y="24" width="98" height="8" rx="4" fill="#C4ADEE"/><rect x="11" y="33" width="88" height="31" rx="8" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/><circle cx="30" cy="52" r="10" fill="rgba(255,255,255,.16)"/><rect x="50" y="42" width="16" height="20" rx="4" fill="rgba(255,255,255,.16)"/><circle cx="84" cy="50" r="8" fill="rgba(255,255,255,.16)"/></svg>`},
+  {name:'Suporte Polaroid',cat:'Personalizados',price:'R$ 24,90',badge:'Novo',
+   desc:'Mostre sua personalidade onde quer que você vá — 100% personalizado.',
+   bg:'linear-gradient(135deg,#FFE0F4 0%,#FFC4E4 100%)',
+   svg:`<svg width="75" height="98" viewBox="0 0 75 98" fill="none"><circle cx="37" cy="20" r="15" stroke="#9B7FD4" stroke-width="5" fill="none"/><circle cx="37" cy="20" r="9" stroke="#C4ADEE" stroke-width="3" fill="none"/><rect x="35" y="33" width="4" height="12" rx="2" fill="#A898D8"/><path d="M18 46 L37 42 L56 46 L58 90 L37 96 L16 90 Z" fill="#9B7FD4" opacity=".9"/><path d="M22 54 L37 51 L52 54 L53 82 L37 87 L21 82 Z" fill="rgba(255,255,255,.15)"/><text x="37" y="74" text-anchor="middle" font-size="14" fill="white" font-weight="bold" font-family="Poppins,sans-serif">FI</text></svg>`},
+];
+
+const features=[
+  {ico:'✦',title:'Impressão Premium',desc:'Filamentos de alta qualidade e impressoras de última geração para um acabamento verdadeiramente impecável.'},
+  {ico:'▲',title:'Produção Artesanal',desc:'Cada unidade é produzida, revisada e embalada individualmente para garantir perfeição em cada detalhe.'},
+  {ico:'◇',title:'Envio para todo Brasil',desc:'Enviamos para qualquer estado. Embalagem segura, rastreamento em tempo real e entrega pontual garantida.'},
+];
+
+const testimonials=[
+  {name:'Ana Luíza M.',city:'São Paulo, SP',ini:'AL',text:'Comprei o organizador de skincare pra minha penteadeira ficar mais bonita, amei o resultado, tão lindinho'},
+  {name:'Marcos Vieira',city:'Curitiba, PR',ini:'MV',text:'Os vasinhos de planta deram um charme para o meu escritório, achei bem resistentes e o acabamento é top, parabéns'},
+  {name:'Beatriz Costa',city:'Rio de Janeiro, RJ',ini:'BC',text:'Pedi alguns chaveiros para a minha formatura e distribui como lembrancinha. Os convidados amaram e eu também'},
+  {name:'Fábio Rosa',city:'Porto Alegre, RS',ini:'FR',text:'Estava procurando organizadores para minhas ferramentas... Qualidade ótima e chegou rápido'},
+];
+
+const subcategories={
+  'Casa':[
+    {name:'Decoração',desc:'Vasos, luminárias & enfeites',color:'#EDE5FF',ico:'✨',subs:[
+      {name:'Luminárias',desc:'Luz com design único',color:'#FFF4E8',ico:'💡'},
+      {name:'Suporte para livros',desc:'Estilo na sua estante',color:'#EDE5FF',ico:'📚'},
+      {name:'Placas decorativas',desc:'Personalidade nas paredes',color:'#FFE8F4',ico:'🖼️'},
+      {name:'Bandejas organizadoras',desc:'Elegância & funcionalidade',color:'#E8EEFF',ico:'🫙'},
+      {name:'Porta-retratos',desc:'Memórias com estilo',color:'#FFF8E8',ico:'🖼️'},
+      {name:'Esculturas minimalistas',desc:'Arte em 3D',color:'#F4E8FF',ico:'🗿'},
+      {name:'Porta-chaves',desc:'Organização com charme',color:'#FFF8E8',ico:'🔑'},
+      {name:'Imãs de geladeira',desc:'Charme na sua cozinha',color:'#FFF0E8',ico:'🧲'},
+      {name:'Quadros',desc:'Arte 3D para suas paredes',color:'#F4EEFF',ico:'🖼️'},
+    ]},
+    {name:'Cozinha',desc:'Porta-temperos & utensílios',color:'#FFF4E8',ico:'🍳',subs:[
+      {name:'Suportes para utensílios',desc:'Organização na bancada',color:'#FFF4E8',ico:'🥄'},
+      {name:'Fruteiras & Cestos',desc:'Estilo e praticidade',color:'#FFF8E8',ico:'🍎'},
+      {name:'Recipientes',desc:'Armazenamento com design',color:'#FFF0E8',ico:'🫙'},
+      {name:'Porta-temperos',desc:'Sabor organizado',color:'#FFFBE8',ico:'🧂'},
+      {name:'Organizadores',desc:'Tudo no lugar certo',color:'#FFF4E8',ico:'📦'},
+    ]},
+    {name:'Banheiro',desc:'Organização & praticidade',color:'#E8FFF4',ico:'🚿',subs:[
+      {name:'Suportes',desc:'Suportes para o banheiro',color:'#E8FFF4',ico:'🚿'},
+      {name:'Organizadores',desc:'Organização & praticidade',color:'#E8FFEE',ico:'📦'},
+    ]},
+    {name:'Home Office',desc:'Organização de mesa & desk',color:'#E8EEFF',ico:'🖥️',subs:[
+      {name:'Organizadores',desc:'Organização para seu desk',color:'#E8EEFF',ico:'📦'},
+      {name:'Suportes',desc:'Suportes para home office',color:'#EDE8FF',ico:'🖥️'},
+    ]},
+    {name:'Jardim & Plantas',desc:'Vasos, suportes & regadores',color:'#E8FFE8',ico:'🪴',subs:[
+      {name:'Vasos de plantas',desc:'Design para suas plantas',color:'#E8FFE8',ico:'🪴'},
+      {name:'Suporte para vasos',desc:'Eleve suas plantas',color:'#EEFFF0',ico:'🌿'},
+      {name:'Regadores',desc:'Regar com estilo',color:'#E8FFF4',ico:'💧'},
+      {name:'Mini jardins',desc:'Natureza em miniatura',color:'#F0FFE8',ico:'🌱'},
+    ]},
+    {name:'Utilidades',desc:'Ganchos, suportes & mais',color:'#E8F8FF',ico:'🔧',subs:[
+      {name:'Ganchos de parede',desc:'Praticidade nas paredes',color:'#E8F8FF',ico:'🪝'},
+      {name:'Nichos de parede',desc:'Espaço com estilo',color:'#EEF8FF',ico:'🗄️'},
+      {name:'Suportes',desc:'Suporte para tudo',color:'#E8EEFF',ico:'🔧'},
+    ]},
+  ]
+};
+
+function renderCats(){
+  document.getElementById('catsGrid').innerHTML=categories.map(c=>`
+    <div class="cat-card" onclick="openSubcat('${c.name}')" style="${subcategories[c.name]?'cursor:pointer;':''}">
+      <div class="cat-ico" style="background:${c.color}"><span>${c.ico}</span></div>
+      <div class="cat-name">${c.name}</div>
+      <div class="cat-desc">${c.desc}</div>
+      ${subcategories[c.name]?'<div style="font-size:10px;color:var(--purple-s);font-weight:600;margin-top:6px">Ver subcategorias →</div>':''}
+    </div>
+  `).join('');
+}
+
+function openSubcat(name){
+  const subs=subcategories[name];
+  if(!subs)return;
+  const sec=document.getElementById('subcatSection');
+  document.getElementById('subcatTitle').textContent=name;
+  document.getElementById('subcatGrid').innerHTML=subs.map(s=>`
+    <div class="cat-card" onclick="${s.subs?`openProducts('${s.name}')`:''}" style="${s.subs?'cursor:pointer;':''}">
+      <div class="cat-ico" style="background:${s.color}"><span>${s.ico}</span></div>
+      <div class="cat-name">${s.name}</div>
+      <div class="cat-desc">${s.desc}</div>
+      ${s.subs?'<div style="font-size:10px;color:var(--purple-s);font-weight:600;margin-top:6px">Ver produtos →</div>':''}
+    </div>
+  `).join('');
+  sec.style.display='block';
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function openProducts(subname){
+  const allSubs=Object.values(subcategories).flat();
+  const sub=allSubs.find(s=>s.name===subname);
+  if(!sub||!sub.subs)return;
+  const sec=document.getElementById('subcatSection');
+  document.getElementById('subcatTitle').textContent=subname;
+  document.getElementById('subcatGrid').innerHTML=sub.subs.map(p=>`
+    <div class="cat-card">
+      <div class="cat-ico" style="background:${p.color}"><span>${p.ico}</span></div>
+      <div class="cat-name">${p.name}</div>
+      <div class="cat-desc">${p.desc}</div>
+    </div>
+  `).join('');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function closeSubcat(){
+  document.getElementById('subcatSection').style.display='none';
+}
+
+function renderProds(){
+  document.getElementById('prodsGrid').innerHTML=products.map(p=>`
+    <div class="prod-card">
+      <div class="prod-img" style="background:${p.bg}">
+        ${p.badge?`<div class="prod-badge">${p.badge}</div>`:''}
+        <button class="prod-wish" onclick="toggleWish(this)">🤍</button>
+        ${p.svg}
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat">${p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-footer">
+          <div class="prod-price">${p.price}</div>
+          <button class="prod-add" onclick="addCart('${p.name}')">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFeats(){
+  document.getElementById('featsGrid').innerHTML=features.map(f=>`
+    <div class="feat-card">
+      <div class="feat-ico">${f.ico}</div>
+      <div class="feat-title">${f.title}</div>
+      <div class="feat-desc">${f.desc}</div>
+    </div>
+  `).join('');
+}
+
+function renderTestis(){
+  document.getElementById('testiGrid').innerHTML=testimonials.map(t=>`
+    <div class="testi-card">
+      <div class="testi-q">"</div>
+      <p class="testi-text">${t.text}</p>
+      <div class="testi-foot">
+        <div class="testi-av">${t.ini}</div>
+        <div>
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-loc">${t.city}</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+let cartCount=0;
+
+function addCart(name){
+  cartCount++;
+  const b=document.getElementById('cartBadge');
+  b.textContent=cartCount;
+  b.style.display='flex';
+  showToast('✓ "'+name+'" adicionado ao carrinho!');
+}
+
+function toggleWish(btn){
+  btn.textContent=btn.textContent==='🤍'?'❤️':'🤍';
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function closeEnvioPopup(e){
+  if(e.target===document.getElementById('envioPopup'))
+    document.getElementById('envioPopup').classList.remove('open');
+}
+function closePopup(e){
+  if(e.target===document.getElementById('trocasPopup'))
+    document.getElementById('trocasPopup').classList.remove('open');
+}
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function subscribeNL(){
+  const inp=document.getElementById('nlInput');
+  if(!inp.value||!inp.value.includes('@')){
+    inp.style.borderColor='rgba(255,100,100,.7)';
+    setTimeout(()=>inp.style.borderColor='',1200);
+    return;
+  }
+  document.getElementById('nlForm').style.display='none';
+  document.getElementById('nlOk').style.display='block';
+  showToast('🎉 Bem-vindo(a) à família Fábrica Infinita!');
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>30);
+});
+
+renderCats();
+renderProds();
+renderFeats();
+renderTestis();
+</script>
+</body>
+</html>
